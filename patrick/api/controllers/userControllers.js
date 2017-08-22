@@ -1,21 +1,29 @@
 const mongoose = require('mongoose');
-const User = mongoose.model('../models/userModels');
-const bodyParser = require('body-parser');
+const User = require('../models/userModels');
+// const bodyParser = require('body-parser');
 
 const STATUS_USER_ERROR = 422;
 
 
-const login = (req, res) => {
-  const { username, password } = req.body;
-  // log in
-}
+// const login = (req, res) => {
+//   const { username, password } = req.body;
+//   // log in
+// }
 
 const createUser = (req, res) => {
     const { username, password } = req.body;
     const newUser = new User({ username, password });
+    // newUser.save((err, user) => {
+    //   if(err) {
+    //     res.status(STATUS_USER_ERROR);
+    //     res.json(err);
+    //     return;
+    //   }
+    //   res.json(user);
+    // })
     newUser.save()
-      .then((err, user) => {
-          res.json(user);
+      .then((newUser) => {
+          res.json(newUser);
       })
       .catch((err) => {
           res.status(STATUS_USER_ERROR);
@@ -26,7 +34,4 @@ const createUser = (req, res) => {
 
 module.exports = {
     createUser,
-    /* listUsers,
-    findUser,
-    deleteUser */
 };

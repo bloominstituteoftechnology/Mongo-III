@@ -20,3 +20,10 @@
 // const deletePost = (req, res) => {
 //   //
 // };
+// 
+// module.exports = {
+//   createPost,
+//   listPosts,
+//   findPosts,
+//   makeNewPost
+// }
