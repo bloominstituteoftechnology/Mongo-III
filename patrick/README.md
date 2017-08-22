@@ -36,12 +36,12 @@
   - `mkdir data` & `mongod --dbpath data` - OKAY √
 
 * Your client has the following client side routes. You'll have to implement the backend in order to be able to navigate and use the client side application. You shouldn't have any thing to do on the front end. When your back end works your front end should start to work as well.
-  - `'/'` our root route is a simple login page. This login form will hit submit a POST request to find a user in the DB and send that response back to the client. `Note` We are storing the user's _id in `localstorage`. and using it to submit more data throughout the app.
-  - `'/create-user'` this route has a create user form. This create user for will hit `/new-user'` and add a user to the DB
+  - `'/'` our root route is a simple login page. This login form will hit submit a POST request to find a user in the DB and send that response back to the client. NOTE: We are storing the user's _id in `localstorage`. and using it to submit more data throughout the app.
+  - `'/create-user'` this route has a create user form. This create user form will hit `/new-user'` and add a user to the DB
   - `'/posts'` this route will display all of the blog posts in the DB. Just the title will be shown. Each post will be a link to a 'single' blog post page.
   - `/posts:id` this route will take the user to the single blog post page. You can add comments on this page to a blog post.
   - `/new-post` this route will allow the user to create a new blog post. A title and content are given and sent up to the Server.
-* #### `NOTE`
+#### NOTE:
   - It is important to understand that READING THE CONSOLE will tell you whether or not your endpoints are working. If they're not working, you'll see an error message in the console explaining where the break down might possibly be.
 
 ### Todo
