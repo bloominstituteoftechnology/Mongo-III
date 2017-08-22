@@ -30,5 +30,5 @@ const routes = require('./api/routes/routes');
 routes(server);
 
 server.listen(port, () => {
-  console.log(`Server up and running on ${port}`);
+  console.log(`YESSIRREE, the server up and running on ${port}!!!`);
 });
