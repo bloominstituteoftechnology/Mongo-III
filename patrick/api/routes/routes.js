@@ -1,12 +1,14 @@
 module.exports = (app) => {
-  //add your new routes here
-
-  const controllerMethods = require('../controllers/userController');
-
-  app.route('/posts')
-     // Login: http://localhost:3000/
-    //  .get(controllerMethods.listUsers)
-     // http://localhost:3000/create-user
-     .post(controllerMethods.createUser);
-
+  // //add your new routes here
+  //
+  // const userControllers = require('../controllers/userControllers');
+  //
+  // // http://localhost:3000/  <~~~ LOG IN EXISTING USER ???
+  // app.route('/')
+  //   .post(userControllers.login)
+  //
+  // // http://localhost:3000/create-user
+  // app.route('/create-user')
+  //    .post(userControllers.createUser);
+  //
 };
