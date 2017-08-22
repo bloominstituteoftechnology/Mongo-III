@@ -1,8 +1,12 @@
 module.exports = (app) => {
   //add your new routes here
 
-  // http://localhost:3000/create-user
+  const controllerMethods = require('../controllers/userController');
 
-  // Login: http://localhost:3000/
+  app.route('/posts')
+     // Login: http://localhost:3000/
+    //  .get(controllerMethods.listUsers)
+     // http://localhost:3000/create-user
+     .post(controllerMethods.createUser);
 
 };
