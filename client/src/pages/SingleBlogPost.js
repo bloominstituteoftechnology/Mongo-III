@@ -12,10 +12,10 @@ export default class SingleBlogPost extends Component {
         title: 'This is a FAKE blog post title', 
         _id: '234lj23kjh', 
         content: 'This is some FAKE content', 
+        author: 'ObjectID(lakjsdlfkj)',
         comments: [
           {text:'This is a FAKE comment', author: 'Stanley Yelnats'},
         ]},
-      comment: '',
     };
     this.handleCommentText = this.handleCommentText.bind(this);
     this.addComment = this.addComment.bind(this);
@@ -30,7 +30,7 @@ export default class SingleBlogPost extends Component {
     console.log(id);
     axios.get(`http://localhost:3030/posts/${id}`)
       .then((data) => {
-        this.setState({post: data});
+        this.setState({ post: data.data });
       })
       .catch((err) => {
         console.log('You are seeing this error because you have yet to implement the `post` to get single post', err );
