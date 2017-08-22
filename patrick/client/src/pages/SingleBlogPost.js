@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import { Comment } from './Comment';
@@ -9,9 +9,9 @@ export default class SingleBlogPost extends Component {
     super();
     this.state = {
       post: {
-        title: 'This is a FAKE blog post title', 
-        _id: '234lj23kjh', 
-        content: 'This is some FAKE content', 
+        title: 'This is a FAKE blog post title',
+        _id: '234lj23kjh',
+        content: 'This is some FAKE content',
         comments: [
           {text:'This is a FAKE comment', author: 'Stanley Yelnats'},
         ]},
@@ -20,7 +20,7 @@ export default class SingleBlogPost extends Component {
     this.handleCommentText = this.handleCommentText.bind(this);
     this.addComment = this.addComment.bind(this);
   }
-  
+
   componentDidMount() {
     this.getBlogPost()
   }
@@ -36,11 +36,11 @@ export default class SingleBlogPost extends Component {
         console.log('You are seeing this error because you have yet to implement the `post` to get single post', err );
       });
   }
-  
+
   addComment(e) {
     e.preventDefault();
     const { comment } = this.state;
-    const { id } = this.props.match.params    
+    const { id } = this.props.match.params
     const newComment = {
       text: comment,
       author: localStorage.getItem('uuID'),
@@ -56,7 +56,7 @@ export default class SingleBlogPost extends Component {
         console.log('Something went wront with your "UPDATE" method on `posts/:id`')
       })
   }
-  
+
   handleCommentText(e) {
     this.setState({comment: e.target.value});
   }
@@ -72,7 +72,7 @@ export default class SingleBlogPost extends Component {
         })}
         <p>Add comments</p>
         <form onSubmit={this.addComment}>
-          <textarea 
+          <textarea
             onChange={this.handleCommentText}
             value={this.state.comment}
             placeholder="add comment"
@@ -84,4 +84,3 @@ export default class SingleBlogPost extends Component {
     );
   }
 }
-
