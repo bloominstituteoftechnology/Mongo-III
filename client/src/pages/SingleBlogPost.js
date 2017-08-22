@@ -29,7 +29,7 @@ export default class SingleBlogPost extends Component {
     console.log(id);
     axios.get(`http://localhost:3030/posts/${id}`)
       .then((data) => {
-        this.setState({post: data});
+        this.setState({post: data.data});
       })
       .catch((err) => {
         console.log('You are seeing this error because you have yet to implement the `post` to get single post', err );
