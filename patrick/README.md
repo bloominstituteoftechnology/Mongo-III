@@ -34,6 +34,7 @@
   ```
 * To run the app server, run `npm start` in the root of the project and ensure that your `mongod` server is running as well!
   - `mkdir data` & `mongod --dbpath data` - OKAY √
+
 * Your client has the following client side routes. You'll have to implement the backend in order to be able to navigate and use the client side application. You shouldn't have any thing to do on the front end. When your back end works your front end should start to work as well.
   - `'/'` our root route is a simple login page. This login form will hit submit a POST request to find a user in the DB and send that response back to the client. `Note` We are storing the user's _id in `localstorage`. and using it to submit more data throughout the app.
   - `'/create-user'` this route has a create user form. This create user for will hit `/new-user'` and add a user to the DB
