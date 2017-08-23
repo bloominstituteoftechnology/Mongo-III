@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+// const Schema = mongoose.Schema;
 
-const User = mongoose.model('../models/userModels');
+// const User = mongoose.model('../models/userModels');
 
 // {
 //   title: 'This is a fake blog post title',
@@ -23,7 +23,7 @@ const PostSchema = new mongoose.Schema({
   author: {
     name: [
       {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
       }
     ],

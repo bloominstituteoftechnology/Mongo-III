@@ -4,11 +4,18 @@ const User = require('../models/userModels');
 
 const STATUS_USER_ERROR = 422;
 
-
-// const login = (req, res) => {
-//   const { username, password } = req.body;
-//   // log in
-// }
+const login = (req, res) => {
+  const { username, password } = req.body;
+  User.findOne({ $and: [{ username }, { password }] })
+    .exec()
+    .then((user) => {
+      res.json(user);
+    })
+    .catch((err) => {
+      res.status(STATUS_USER_ERROR);
+      res.json({ error: err })
+    });
+}
 
 const createUser = (req, res) => {
     const { username, password } = req.body;
@@ -34,4 +41,5 @@ const createUser = (req, res) => {
 
 module.exports = {
     createUser,
+    login,
 };
