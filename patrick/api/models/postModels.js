@@ -54,10 +54,10 @@ const PostSchema = new Schema({
 // // Should this be in a separate commentsModel.js file?
 // // const CommentSchema = new mongoose.Schema({
 // const CommentSchema = new Schema({
-//   // _creator: {
-//   //   type: Number,
-//   //   ref: 'User'
-//   // },
+//   _parent: {
+//     type: mongoose.Schema.Types.ObjectId,
+//     ref: 'Post'
+//   },
 //   text: String,
 //   author: {
 //     type: mongoose.Schema.Types.ObjectId,

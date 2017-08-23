@@ -26,6 +26,7 @@ const createPost = (req, res) => {
 const listPosts = (req, res) => {
   Post.find({})
     .populate()
+    // .populate('title', 'author')
     .exec()
     .then((newPost) => {
         res.json(newPost);
@@ -41,14 +42,16 @@ const getPostById = (req, res) => {
   // console.log(req.params);
   // console.log(req.body);
   // const { title, comments, content, author } = req.body;
+  // Post.findOne(postId)
   Post.findOne({ postId })
     .populate()
-    // .populate([ 'title', 'comments', 'content', 'author' ])
+    // .populate('title', 'author', 'content', 'comments')
     .exec()
     .then((post) => {
       res.json(post);
     })
     .catch((err) => {
+      // console.log(post);
       res.status(STATUS_USER_ERROR);
       res.json({ stack: err.stack, message: err.message });
     });
@@ -59,7 +62,28 @@ const updatePostById = (req, res) => {
 };
 
 const addComment = (req, res) => {
+  // const { id } = req.params;
+  // const { content } = req.body;
   //
+  // const newComment = new Comment({ _parent: id, comment });
+  // newComment.save()
+  //     .then((comment) => {
+  //         Post.findById(id)
+  //             .exec()
+  //             .then((post) => {
+  //                 post.comments.push(comment);
+  //                 post.save();
+  //                 res.send({ success: true });
+  //             })
+  //             .catch((err) => {
+  //             res.status(STATUS_USER_ERROR);
+  //             res.json({ stack: err.stack, message: err.message });
+  //         });
+  //     })
+  //     .catch((err) => {
+  //         res.status(STATUS_USER_ERROR);
+  //         res.json({ stack: err.stack, message: err.message });
+  //     });
 };
 
 // const deletePostById = (req, res) => {
