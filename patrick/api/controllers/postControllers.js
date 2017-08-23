@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const Post = require('../models/postModels');
-// const bodyParser = require('body-parser');
-//
+
 const STATUS_USER_ERROR = 422;
 
 const createPost = (req, res) => {
@@ -41,4 +40,5 @@ module.exports = {
   createPost,
   // listPosts,
   // updatePost,
+  // deletePost,
 }

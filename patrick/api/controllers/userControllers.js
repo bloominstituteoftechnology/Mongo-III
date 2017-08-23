@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const User = require('../models/userModels');
-// const bodyParser = require('body-parser');
 
 const STATUS_USER_ERROR = 422;
 
