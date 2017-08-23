@@ -1,4 +1,3 @@
-const mongoose = require('mongoose');
 const Post = require('../models/postModels');
 
 const STATUS_USER_ERROR = 422;
@@ -38,7 +37,21 @@ const listPosts = (req, res) => {
 };
 
 const getPostById = (req, res) => {
-  //
+  const { postId } = req.params;
+  // console.log(req.params);
+  // console.log(req.body);
+  // const { title, comments, content, author } = req.body;
+  Post.findOne({ postId })
+    .populate()
+    // .populate([ 'title', 'comments', 'content', 'author' ])
+    .exec()
+    .then((post) => {
+      res.json(post);
+    })
+    .catch((err) => {
+      res.status(STATUS_USER_ERROR);
+      res.json({ stack: err.stack, message: err.message });
+    });
 };
 
 const updatePostById = (req, res) => {

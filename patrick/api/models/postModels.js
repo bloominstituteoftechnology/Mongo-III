@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+// const model = mongoose.model;               // <~~~ WHY DOESN'T THIS WORK?????
 
 // const User = mongoose.model('../models/userModels');
 
@@ -14,7 +16,9 @@ const mongoose = require('mongoose');
 //     {text:'This is a class comment', author: 'Stanley Yelnats'},
 //   ]
 // }
-const PostSchema = new mongoose.Schema({
+
+// const PostSchema = new mongoose.Schema({
+const PostSchema = new Schema({
   title: {
     type: String,
     required: true,
@@ -22,13 +26,14 @@ const PostSchema = new mongoose.Schema({
   author: {
     name: [
       {
-        type: mongoose.Schema.Types.ObjectId,
+        // type: mongoose.Schema.Types.ObjectId,
+        type: Schema.Types.ObjectId,
         ref: 'User',
       }
     ],
-    // _id: String,
+    // User._id: Schema.Types.ObjectId,
   },
-  // _id: String,
+  // User._id: Schema.Types.ObjectId,
   content: {
     type: String,
     required: true,
@@ -38,10 +43,29 @@ const PostSchema = new mongoose.Schema({
       text: String,
       author: {
         type: String,
-        default: 'Stanley Yelnats'
+        default: 'Stanley Yelnats',
+        ref: 'User'
       }
     },
   ],
 });
 
+// // per: http://mongoosejs.com/docs/populate.html
+// // Should this be in a separate commentsModel.js file?
+// // const CommentSchema = new mongoose.Schema({
+// const CommentSchema = new Schema({
+//   // _creator: {
+//   //   type: Number,
+//   //   ref: 'User'
+//   // },
+//   text: String,
+//   author: {
+//     type: mongoose.Schema.Types.ObjectId,
+//     ref: 'User',
+//   }
+// });
+// module.exports = mongoose.model('Comment', CommentSchema);
+
+
 module.exports = mongoose.model('Post', PostSchema);
+// module.exports = model('Post', PostSchema); // <~~~ WHY DOESN'T THIS WORK?????

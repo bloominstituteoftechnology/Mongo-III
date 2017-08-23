@@ -34,7 +34,7 @@ export default class SingleBlogPost extends Component {
         this.setState({post: data.data});
       })
       .catch((err) => {
-        console.log('You are seeing this error because you have yet to implement the `post` to get single post', err );
+        console.log('You are seeing this error because you have yet to implement the `get` method to get single post', err );
       });
   }
 
@@ -54,7 +54,7 @@ export default class SingleBlogPost extends Component {
         }, 200);
       })
       .catch((err) => {
-        console.log('Something went wront with your "UPDATE" method on `posts/:id`')
+        console.log('Something went wrong with your "UPDATE" method on `posts/:id`')
       })
   }
 

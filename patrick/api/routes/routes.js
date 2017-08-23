@@ -3,6 +3,7 @@ module.exports = (app) => {
 
   const userControllers = require('../controllers/userControllers');
   const postControllers = require('../controllers/postControllers');
+  // const commentControllers = require('../controllers/commentControllers');
 
   app.route('/new-user')
       .post(userControllers.createUser);
@@ -15,6 +16,7 @@ module.exports = (app) => {
 
   app.route('/posts')
       .get(postControllers.listPosts);
+      // .delete(postControllers.deletePostById);
 
   // plural or single? I think the plural is just for the list of posts?
   // app.route('/post/:id')
@@ -23,7 +25,7 @@ module.exports = (app) => {
       .put(postControllers.updatePostById)
       .put(postControllers.addComment);
 
-  // app.route('/post')
-  //     .delete(postControllers.deletePostById);
-
+  // app.route('/posts/:id/comments')
+  //     .post(commentControllers.postComment);
+  //     .delete(commentControllers.deleteComment);
 };
