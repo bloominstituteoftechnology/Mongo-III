@@ -6,7 +6,7 @@ module.exports = (app) => {
   .post(userController.createUser);
   app.route('/login')
   .post(userController.userLogin);
-  app.route('new-post')
+  app.route('/new-post')
   .post(postController.createPost);
   app.route('/posts')
   .get(postController.postList);
