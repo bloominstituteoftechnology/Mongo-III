@@ -6,19 +6,17 @@ module.exports = (app) => {
   app.route('/new-user')
   .post(userControllerMethods.createUser);
 
-  // app.route('/login')
-  // .post(userControllerMethods.findUser);
+  app.route('/login')
+  .post(userControllerMethods.findUser);
 
-  // app.route('/new-post')
-  // .post(postControllerMethods.newPost);
+  app.route('/new-post')
+  .post(postControllerMethods.createPost);
 
   // app.route('/posts')
   // .get(postControllerMethods.listPosts);
 
   // app.route('/posts/:id')
-  // .get(postControllerMethods.singlePost);
-
-  // app.route('/posts/:id')
-  // .put(postControllerMethods.updatePost)
+  // .get(postControllerMethods.singlePost)
+  // .put(postControllerMethods.updatePost);
 
 };
