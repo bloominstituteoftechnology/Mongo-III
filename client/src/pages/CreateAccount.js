@@ -26,7 +26,8 @@ export default class CreateAccount extends Component {
     const userToSave = {username: this.state.username, password: this.state.password};
     axios.post('http://localhost:3030/new-user', userToSave)
       .then((data) => {
-        localStorage.setItem('uuID', data.data._id);
+        console.log(data);
+        localStorage.setItem('uuID', data.data.user._id);
         setTimeout(() => {
           window.location = '/posts';
         }, 200);
@@ -40,25 +41,25 @@ export default class CreateAccount extends Component {
       <form className="Login-form">
         <FormGroup className="Login-group" controlId="formHorizontalEmail">
             User Name
-            <FormControl 
+            <FormControl
               id="formHorizontalEmail"
               className="form-control"
-              onChange={this.handleSetusername} 
+              onChange={this.handleSetusername}
               placeholder="User Name"
-              type="text" 
-              value={this.state.username} 
+              type="text"
+              value={this.state.username}
             />
-          
+
           </FormGroup>
           <FormGroup className="Login-group" controlId="formHorizontalPassword">
             Password
-            <FormControl 
+            <FormControl
               id="formHorizontalPassword"
               className="form-control"
-              onChange={this.handleSetPassword} 
+              onChange={this.handleSetPassword}
               placeholder="password"
-              type="password" 
-              value={this.state.password} 
+              type="password"
+              value={this.state.password}
             />
           <Link to="/">Already a member? Login here.</Link>
           <br/>
