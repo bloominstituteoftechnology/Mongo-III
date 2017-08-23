@@ -4,6 +4,8 @@ import axios from 'axios';
 
 import { Comment } from './Comment';
 
+import { ListGroup, ListGroupItem } from 'react-bootstrap'
+
 export default class SingleBlogPost extends Component {
   constructor() {
     super();
@@ -68,9 +70,14 @@ export default class SingleBlogPost extends Component {
         <h4>{title}</h4>
         <h5>Posted by: {author.username}</h5>
         <div>{content}</div>
-        {comments.map((comment, ind) => {
-          return <Comment comment={comment} key={ind} />
-        })}
+        <div className='container'>
+          <ListGroup>
+            <ListGroupItem>Comments</ListGroupItem>
+            {comments.map((comment, ind) => {
+              return <Comment comment={comment} key={ind} />
+            })}
+          </ListGroup>
+        </div>
         <p>Add comments</p>
         <form onSubmit={this.addComment}>
           <textarea
