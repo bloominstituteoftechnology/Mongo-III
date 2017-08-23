@@ -26,6 +26,7 @@ const createPost = (req, res) => {
 const listPosts = (req, res) => {
   Post.find({})
     .populate()
+    // .populate('_author')
     // .populate('title', 'author')
     .exec()
     .then((newPost) => {
@@ -45,6 +46,7 @@ const getPostById = (req, res) => {
   // Post.findOne(postId)
   Post.findOne({ postId })
     .populate()
+    // .populate('_parent')
     // .populate('title', 'author', 'content', 'comments')
     .exec()
     .then((post) => {

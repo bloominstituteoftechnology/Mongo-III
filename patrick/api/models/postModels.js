@@ -32,8 +32,11 @@ const PostSchema = new Schema({
       }
     ],
     // User._id: Schema.Types.ObjectId,
+    // _author: User._id,
   },
-  // User._id: Schema.Types.ObjectId,
+  // Post._id: Schema.Types.ObjectId,
+  // _parent: Post._id,
+  // _parent: true, ???
   content: {
     type: String,
     required: true,
