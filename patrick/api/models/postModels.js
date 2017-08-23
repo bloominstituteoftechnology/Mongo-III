@@ -46,7 +46,7 @@ const PostSchema = new Schema({
       text: String,
       author: {
         type: String,
-        default: 'Stanley Yelnats',
+        // default: 'Stanley Yelnats',
         ref: 'User'
       }
     },
