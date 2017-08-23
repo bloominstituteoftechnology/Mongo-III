@@ -66,7 +66,7 @@ export default class SingleBlogPost extends Component {
     return (
       <div>
         <h4>{title}</h4>
-        <h5>{comments.author}</h5>
+        <h5>{author}</h5>
         <div>{content}</div>
         {comments.map((comment, ind) => {
           return <Comment comment={comment} key={ind} />

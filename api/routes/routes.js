@@ -12,8 +12,8 @@ module.exports = (app) => {
   app.route('/new-post')
   .post(postControllerMethods.createPost);
 
-  // app.route('/posts')
-  // .get(postControllerMethods.listPosts);
+  app.route('/posts')
+  .get(postControllerMethods.listPosts);
 
   // app.route('/posts/:id')
   // .get(postControllerMethods.singlePost)
