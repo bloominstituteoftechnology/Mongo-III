@@ -28,7 +28,6 @@ export default class SingleBlogPost extends Component {
 
   getBlogPost(){
     const { id } = this.props.match.params
-    console.log('here',id);
     axios.get(`http://localhost:3030/posts/${id}`)
       .then((data) => {
         this.setState({post: data.data});
@@ -64,7 +63,6 @@ export default class SingleBlogPost extends Component {
 
   render() {
     const { title, comments, content, author } = this.state.post;
-    console.log(this.state.post);
     return (
       <div>
         <h4>{title}</h4>
