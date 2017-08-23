@@ -18,7 +18,18 @@ const createPost = (req, res) => {
   });
 };
 
-
+const listPosts = (req, res) => {
+  Post.find({})
+  // const promises = 
+  .exec((err, posts) => {
+    if (err) {
+      res.status(STATUS_USER_ERROR);
+      res.json(err);
+    } else {
+      res.json(posts);
+    }
+  });
+}
 
 module.exports = {
   createPost,
