@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
 
 import { Comment } from './Comment';
@@ -11,6 +10,7 @@ export default class SingleBlogPost extends Component {
       post: {
         title: 'This is a FAKE blog post title', 
         _id: '234lj23kjh', 
+        author: 'Patrick Saves the Day',
         content: 'This is some FAKE content', 
         comments: [
           {text:'This is a FAKE comment', author: 'Stanley Yelnats'},
@@ -30,7 +30,7 @@ export default class SingleBlogPost extends Component {
     console.log(id);
     axios.get(`http://localhost:3030/posts/${id}`)
       .then((data) => {
-        this.setState({post: data});
+        this.setState({post: data.data});
       })
       .catch((err) => {
         console.log('You are seeing this error because you have yet to implement the `post` to get single post', err );
@@ -62,10 +62,11 @@ export default class SingleBlogPost extends Component {
   }
 
   render() {
-    const { title, comments, content } = this.state.post;
+    const { title, comments, content, author } = this.state.post;
     return (
       <div>
         <h4>{title}</h4>
+        <h5>{author}</h5>
         <div>{content}</div>
         {comments.map((comment, ind) => {
           return <Comment comment={comment} key={ind} />
