@@ -1,10 +1,4 @@
-const mongoose = require('../mongoose');
-
-mongoose.models = {};
-mongoose.modelSchemas = {};
-
-mongoose.Promise = Promise;
-mongoose.connect('mongodb://localhost/', { useMongClient: true });
+const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
   username: {
@@ -17,4 +11,4 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('Users', UserSchema);
+module.exports = mongoose.model('User', UserSchema);
