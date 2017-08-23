@@ -24,16 +24,21 @@ const PostSchema = new Schema({
     required: true,
   },
   author: {
-    name: [
-      {
+    name:{
         // type: mongoose.Schema.Types.ObjectId,
         type: Schema.Types.ObjectId,
         ref: 'User',
-      }
-    ],
+      },
     // User._id: Schema.Types.ObjectId,
     // _author: User._id,
   },
+
+  // author: {
+  //   name: {
+  //     type: String,
+  //   },
+  // },
+
   // Post._id: Schema.Types.ObjectId,
   // _parent: Post._id,
   // _parent: true, ???
