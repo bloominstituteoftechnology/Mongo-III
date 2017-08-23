@@ -6,7 +6,7 @@ export const Comment = (props) => {
   return (
     <div>
       <div className="Comment">{text}</div>
-      <div className="Author">{author}</div>
+      <div className="Author">{author.username}</div>
     </div>
   )
 };
