@@ -12,5 +12,6 @@ module.exports = (app) => {
   // app.route('/post')
   //     .get(postControllers.listPosts);
   // app.route('/post/:id')
+  //     .get(postControllers.getPostById);
   //     .put(postControllers.updatePost);
 };
