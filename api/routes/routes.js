@@ -1,20 +1,20 @@
 module.exports = (app) => {
-  const postMethods = require('../controllers/postControllers');
-  const userMethods = require('../controllers/userControllers');
+  const postControllers = require('../controllers/postControllers');
+  const userControllers = require('../controllers/userControllers');
 
   app.route('/new-user')
-    .post(userMethods.createUser);
+    .post(userControllers.createUser);
 
   app.route('/login')
-    .post(userMethods.loginUser);
+    .post(userControllers.loginUser);
 
   app.route('/new-post')
-    .post(postMethods.createPost);
+    .post(postControllers.createPost);
 
   app.route('/posts')
-    .get(postMethods.listPosts);
+    .get(postControllers.listPosts);
 
   app.route('/posts/:id')
-    .get(postMethods.findPost)
-    .put(postMethods.updatePost);
+    .get(postControllers.findPost)
+    .put(postControllers.updatePost);
 };

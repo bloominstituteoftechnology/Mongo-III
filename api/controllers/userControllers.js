@@ -7,7 +7,7 @@ const STATUS_OK = 200;
 const checkUserError = (err, res) => {
   if (typeof err === 'string') {
     res.status(STATUS_USER_ERROR);
-    res.json(err);
+    res.json({ Error: err });
     return;
   }
   res.status(STATUS_USER_ERROR);
@@ -31,18 +31,14 @@ const createUser = (req, res) => {
 
 const loginUser = (req, res) => {
   const { username, password } = req.body;
-  User.findOne({ name: username })
+  User.findOne({ name: username, password })
   .exec((err, user) => {
     if (err) {
       checkUserError(err, res);
       return;
     }
-    if (user.password === password) {
-      res.status(STATUS_OK);
-      res.json(user);
-      return;
-    }
-    checkUserError('Wrong Password', res);
+    res.status(STATUS_OK);
+    res.json(user);
   });
 };
 

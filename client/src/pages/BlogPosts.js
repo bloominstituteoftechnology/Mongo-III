@@ -29,6 +29,8 @@ export default class BlogPosts extends Component {
 
   render() {
     const { posts } = this.state;
+    console.log(this.state);
+    if (!posts) return (<div></div>);
     return (
       <div>
       <Link to='/new-post'><button className="btn btn-default btn-sm">Create New Post</button></Link>

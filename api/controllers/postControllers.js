@@ -34,13 +34,13 @@ const createPost = (req, res) => {
 
 const listPosts = (req, res) => {
   Post.find({})
-  .exec((err, post) => {
+  .exec((err, posts) => {
     if (err) {
-      checkUserError(err, res);
+      checkUserError('Error finding the list of posts', res);
       return;
     }
     res.status(STATUS_OK);
-    res.json(post);
+    res.json(posts);
   });
 };
 
@@ -59,12 +59,13 @@ const findPost = (req, res) => {
 
 const updatePost = (req, res) => {
   const { id } = req.params;
-  Post.findByIdAndUpdate(id, req.body)
+  Post.findById(id)
   .exec((err, post) => {
     if (err) {
       checkUserError(err, res);
       return;
     }
+    post.comments.push(req.body.comments);
     res.status(STATUS_OK);
     res.json(post);
   });
