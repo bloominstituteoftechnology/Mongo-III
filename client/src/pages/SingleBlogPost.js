@@ -10,7 +10,7 @@ export default class SingleBlogPost extends Component {
       post: {
         title: 'This is a FAKE blog post title', 
         _id: '234lj23kjh', 
-        author: 'Patrick Saves the Day',
+        author: 'Ryan Saves the Day',
         content: 'This is some FAKE content', 
         comments: [
           {text:'This is a FAKE comment', author: 'Stanley Yelnats'},
