@@ -23,17 +23,27 @@ const PostSchema = new Schema({
     type: String,
     required: true,
   },
+  // author: {
+  //   name:{
+  //       // type: mongoose.Schema.Types.ObjectId,
+  //       type: Schema.Types.ObjectId,
+  //       ref: 'User',
+  //     },
+  //   // User._id: Schema.Types.ObjectId,
+  //   // _author: User._id,
+  // },
+
   author: {
-    name: [
-      {
-        // type: mongoose.Schema.Types.ObjectId,
-        type: Schema.Types.ObjectId,
-        ref: 'User',
-      }
-    ],
-    // User._id: Schema.Types.ObjectId,
-    // _author: User._id,
+    type: Schema.Types.ObjectId,
+    ref: 'User',
   },
+
+  // author: {
+  //   name: {
+  //     type: String,
+  //   },
+  // },
+
   // Post._id: Schema.Types.ObjectId,
   // _parent: Post._id,
   // _parent: true, ???
@@ -41,32 +51,33 @@ const PostSchema = new Schema({
     type: String,
     required: true,
   },
-  comments: [
-    {
-      text: String,
-      author: {
-        type: String,
-        default: 'Stanley Yelnats',
-        ref: 'User'
-      }
-    },
-  ],
+  // comments: [
+  //   {
+  //     text: String,
+  //     author: {
+  //       type: Schema.Types.ObjectId,
+  //       // default: 'Stanley Yelnats',
+  //       ref: 'User'
+  //     }
+  //   },
+  // ],
+  comments: [CommentSchema],
 });
 
 // // per: http://mongoosejs.com/docs/populate.html
 // // Should this be in a separate commentsModel.js file?
 // // const CommentSchema = new mongoose.Schema({
-// const CommentSchema = new Schema({
-//   _parent: {
-//     type: mongoose.Schema.Types.ObjectId,
-//     ref: 'Post'
-//   },
-//   text: String,
-//   author: {
-//     type: mongoose.Schema.Types.ObjectId,
-//     ref: 'User',
-//   }
-// });
+const CommentSchema = new Schema({
+  // _parent: {
+  //   type: mongoose.Schema.Types.ObjectId,
+  //   ref: 'Post'
+  // },
+  text: String,
+  author: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+  }
+});
 // module.exports = mongoose.model('Comment', CommentSchema);
 
 
