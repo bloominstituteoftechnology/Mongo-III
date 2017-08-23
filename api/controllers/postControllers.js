@@ -30,29 +30,42 @@ const listPosts = (req, res) => {
 
 const findSinglePost = (req, res) => {
   const { id } = req.params;
-  console.log('ID from req.params ' + id);
   Post.findById(id)
-  .populate('author', 'comments.userName')
-  .exec()
-    .then((post) => {
-      console.log(post);
-      res.json(post);
-    })
-    .catch((err) => {
+  .populate('author', 'username')
+  .exec((err, post) => {
+    if (err) {
       res.status(STATUS_USER_ERROR);
       res.json({ stack: err.stack, message: err.message });
-    });
+      return;
+    }
+      res.json(post);
+  });
 }
 
-const updatePost = (req, res) => {
+const addComment = (req, res) => {
   const { id } = req.params;
-  Post.findOne
-
+  const { text, author } = req.query;
+  const newComment = { text, author };
+  Post.findById(id, (err, post) => {
+    post.comments.push(newComment)
+    post.save((error, blogPost) => {
+      Post.findById(blogPost._id)
+      .populate('comments.author', 'username')
+      .exec((postErr, myPost) => {
+        if (postErr) {
+          res.status(STATUS_USER_ERROR);
+          res.json(postErr)
+          return;
+        }
+        res.json(myPost);
+      })
+    })
+  });
 }
 
 module.exports = {
   makeNewPost,
   listPosts,
   findSinglePost,
-  updatePost,
+  addComment,
 }

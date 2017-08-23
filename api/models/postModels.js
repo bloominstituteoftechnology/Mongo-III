@@ -4,10 +4,11 @@ const Schema = mongoose.Schema;
 const PostSchema = new Schema({
   title: 'String',
   author: {
-    type: Schema.Types.ObjectId, ref: 'User'
+    type: Schema.Types.ObjectId, 
+    ref: 'User'
   },
   content: 'String',
-  comments: [{ type: Schema.Types.ObjectId, ref: 'User' }],
+  comments: [{ text: 'String', author: { type: Schema.Types.ObjectId, ref: 'User' }}],
 });
 
 module.exports = mongoose.model('Post', PostSchema);

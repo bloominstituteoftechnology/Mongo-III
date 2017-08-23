@@ -16,9 +16,7 @@ app.route('/posts')
   .get(postControllers.listPosts);
 
 app.route('/posts/:id')
-  .get(postControllers.findSinglePost);
-  
-app.route('/posts/:id')
-  .put(postControllers.updatePost);
+  .get(postControllers.findSinglePost)
+  .put(postControllers.addComment);
 
 }
