@@ -1,25 +1,35 @@
 const mongoose = require('mongoose');
 
-const Post = mongoose.model('Post');
-const UserName = mongoose.model('User');
-const bodyParser = require('body-parser');
+const User = require('../models/userModels');
 
 const STATUS_USER_ERROR = 422;
 
-const createUser = (req, res) => {
+const saveSingleUser = (req, res) => {
   const { username, password } = req.body;
-  const newUser = new User({ userName, password });
-  newUser.save()
-  .then((err, user) => {
+  const newUser = new User({ username, password });
+  newUser.save((err, user) => {
     if(err) {
       res.status(STATUS_USER_ERROR);
       res.json(err); 
       return;
     }
     res.json(user);
-  }); 
+  });
 }
 
-const listPost = (req, res) => {
-  
+const userLogin = (req, res) => {
+  const { username, password } = req.body;
+  User.findOne({ username, password }, (err, user) => {
+    if (err) {
+      res.status(STATUS_USER_ERROR);
+      res.json({ 'username or password is incorrect': err });
+      return;
+    }
+    res.json(user);
+  });
+}
+
+module.exports = {
+  saveSingleUser,
+  userLogin,
 }

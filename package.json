@@ -11,7 +11,8 @@
     "body-parser": "^1.17.2",
     "cors": "^2.8.4",
     "express": "^4.15.4",
-    "mongoose": "^4.11.7"
+    "mongoose": "^4.11.7",
+    "yarn": "^0.27.5"
   },
   "devDependencies": {
     "prettier-eslint": "^6.4.2"

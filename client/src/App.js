@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route }  from 'react-router-dom';
 
 import  * as Pages from './pages'
-import logo from './Logo.svg';
+import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
