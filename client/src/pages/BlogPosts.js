@@ -6,10 +6,14 @@ export default class BlogPosts extends Component {
   constructor() {
     super();
     this.state = {
-      posts: [
-        {title: 'This is a fake post', _id: '325kjlljh'},
-        {title: 'This is another fake post', _id: '234sdjlk'}
-      ],
+      post: {
+        title: 'This is a FAKE blog post title',
+        _id: '234lj23kjh',
+        content: 'This is some FAKE content',
+        author: 'ObjectID(lakjsdlfkj)',
+        comments: [
+          {text:'This is a FAKE comment', author: 'Stanley Yelnats'},
+      ]},
     };
   }
 
@@ -22,7 +26,7 @@ export default class BlogPosts extends Component {
         console.log('You still need to implement the `POSTS` `GET`', err);
       });
   }
-  
+
   render() {
     const { posts } = this.state;
     return (
@@ -39,4 +43,3 @@ export default class BlogPosts extends Component {
     );
   }
 }
-
