@@ -32,30 +32,36 @@
       [4/4] Building fresh packages...
       Done in 191.63s.
   ```
-* To run the app server, run `npm start` in the root of the project and ensure that your `mongod` server is running as well!
+* To run the app server, run `npm start` (or `yarn start`) in the root of the project and ensure that your `mongod` server is running as well!
   - `mkdir data` & `mongod --dbpath data` - OKAY √
 
-* Your client has the following client side routes. You'll have to implement the backend in order to be able to navigate and use the client side application. You shouldn't have any thing to do on the front end. When your back end works your front end should start to work as well.
-  - `'/'` our root route is a simple login page. This login form will hit submit a POST request to find a user in the DB and send that response back to the client. `Note` We are storing the user's _id in `localstorage`. and using it to submit more data throughout the app.
-  - `'/create-user'` this route has a create user form. This create user for will hit `/new-user'` and add a user to the DB
-  - `'/posts'` this route will display all of the blog posts in the DB. Just the title will be shown. Each post will be a link to a 'single' blog post page.
-  - `/posts:id` this route will take the user to the single blog post page. You can add comments on this page to a blog post.
-  - `/new-post` this route will allow the user to create a new blog post. A title and content are given and sent up to the Server.
-* #### `NOTE`
-  - It is important to understand that READING THE CONSOLE will tell you whether or not your endpoints are working. If they're not working, you'll see an error message in the console explaining where the break down might possibly be.
+* Your client has the following client side routes. You'll have to implement the backend in order to be able to navigate and use the client side application. - OKAY √
+* You shouldn't have any thing to do on the front end. When your back end works your front end should start to work as well. - OKAY √
+  - `'/'` our root route is a simple login page. This login form will submit a POST request to find a user in the DB and send that response back to the client. - OKAY √
+  - NOTE: We are storing the user's _id in `localstorage`. and using it to submit more data throughout the app. - OKAY √
+  - `'/create-user'` this route has a create user form. This create user form will hit `/new-user'` and add a user to the DB - OKAY √
+  - `'/posts'` this route will display all of the blog posts in the DB. Just the title will be shown. Each post will be a link to a 'single' blog post page. - OKAY √
+  - `/posts:id` this route will take the user to the single blog post page. You can add comments on this page to a blog post. - OKAY √
+  - `/new-post` this route will allow the user to create a new blog post. A title and content are given and sent up to the Server. - OKAY √
+#### NOTE:
+  - It is important to understand that READING THE CONSOLE will tell you whether or not your endpoints are working. - OKAY √
+  - If they're not working, you'll see an error message in the console explaining where the break down might possibly be. - OKAY √
 
 ### Todo
-* You'll need implement the following routes/models/controllers in order for things to start to come together.
-* You will want to start with the Models. You'll have a User Schema and Post Schema to implement.
+* You'll need implement the following routes/models/controllers in order for things to start to come together. - OKAY √
+* You will want to start with the Models. You'll have a User Schema and Post Schema to implement. - OKAY √
 
 #### POST '/new-user'
-* The object that the client is sending is `{username: foo, password: bar}`. You'll need to implement the controller to handle this user object.
+* The object that the client is sending is `{username: foo, password: bar}`. - OKAY √
+* You'll need to implement the controller to handle this user object. - DONE √
 
 #### POST '/login'
-* This route will be responsible for looking at the same type of object as above, but this time instead of using `save` you'll need to find the user in the DB an send it back to the client.
+* This route will be responsible for looking at the same type of object as above, but - OKAY √
+* this time instead of using `save` you'll need to find the user in the DB an send it back to the client. - DONE √
 
 #### POST '/new-post'
-* This route will take in a new blog post object and save it to the database. You'll need set this up to take an array of comments that can be `referenced` users by `ObjectId`.
+* This route will take in a new blog post object and save it to the database. - OKAY √
+* You'll need set this up to take an array of comments that can be `referenced` users by `ObjectId`. - Hmmm............
 * `/new-post` will also need a `reference` to the author (user) of the post.
 
 ```
