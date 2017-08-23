@@ -61,7 +61,7 @@
 
 #### POST '/new-post'
 * This route will take in a new blog post object and save it to the database. - OKAY √
-* You'll need set this up to take an array of comments that can be `referenced` users by `ObjectId`.
+* You'll need set this up to take an array of comments that can be `referenced` users by `ObjectId`. - Hmmm............
 * `/new-post` will also need a `reference` to the author (user) of the post.
 
 ```

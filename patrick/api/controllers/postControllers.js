@@ -25,7 +25,16 @@ const createPost = (req, res) => {
 }
 
 const listPosts = (req, res) => {
-  //
+  Post.find({})
+    .populate()
+    .exec()
+    .then((newPost) => {
+        res.json(newPost);
+    })
+    .catch((err) => {
+        res.status(STATUS_USER_ERROR);
+        res.json({ stack: err.stack, message: err.message });
+    });
 };
 
 const getPostById = (req, res) => {
@@ -36,14 +45,19 @@ const updatePostById = (req, res) => {
   //
 };
 
-const deletePostById = (req, res) => {
+const addComment = (req, res) => {
   //
 };
+
+// const deletePostById = (req, res) => {
+//   //
+// };
 
 module.exports = {
   createPost,
   listPosts,
   getPostById,
   updatePostById,
-  deletePostById,
+  addComment,
+  // deletePostById,
 }

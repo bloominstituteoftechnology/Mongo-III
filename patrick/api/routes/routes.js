@@ -13,13 +13,17 @@ module.exports = (app) => {
   app.route('/new-post')
       .post(postControllers.createPost);
 
-  // not sure I need this post route
-  app.route('/post')
+  app.route('/posts')
       .get(postControllers.listPosts);
 
-  // plural or single? I think the plural is just for the list of posts
-  app.route('/post/:id')
-  // app.route('/posts/:id')
+  // plural or single? I think the plural is just for the list of posts?
+  // app.route('/post/:id')
+  app.route('/posts/:id')
       .get(postControllers.getPostById)
-      .put(postControllers.updatePostById);
+      .put(postControllers.updatePostById)
+      .put(postControllers.addComment);
+
+  // app.route('/post')
+  //     .delete(postControllers.deletePostById);
+
 };
