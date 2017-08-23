@@ -24,21 +24,26 @@ const createPost = (req, res) => {
     });
 }
 
-// const listPosts = (req, res) => {
-//   //
-// };
-//
-// const updatePost = (req, res) => {
-//   //
-// };
-//
-// const deletePost = (req, res) => {
-//   //
-// };
+const listPosts = (req, res) => {
+  //
+};
+
+const getPostById = (req, res) => {
+  //
+};
+
+const updatePostById = (req, res) => {
+  //
+};
+
+const deletePostById = (req, res) => {
+  //
+};
 
 module.exports = {
   createPost,
-  // listPosts,
-  // updatePost,
-  // deletePost,
+  listPosts,
+  getPostById,
+  updatePostById,
+  deletePostById,
 }
