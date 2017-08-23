@@ -5,6 +5,9 @@ const cors = require('cors');
 const port = process.env.PORT || 3030;
 const server  = express();
 
+const User = require('./api/models/userModels');
+const Post = require('./api/models/postModels');
+
 const corsOptions = {
     "origin": "*",
     "methods": "GET, HEAD, PUT, PATCH, POST, DELETE",
