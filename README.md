@@ -30,20 +30,15 @@
 
 #### POST '/new-post'
 * This route will take in a new blog post object and save it to the database. You'll need set this up to take an array of comments that can be `referenced` users by `ObjectId`.
-* `/new-post` will also need a `reference` to the author (user) of the post. 
+* `/new-post` will also need a `reference` to the author (user) of the post. At this point your comments should be empty. 
 
 ```
 {
-  title: 'This is a fake blog post title', 
-  author: {
-    name: 'Jen Urso'
-    _id: '2lkj3j23,
-  },
-  _id: '234lj23kjh', 
-  content: 'This is some classy fake content', 
-  comments: [
-    {text:'This is a class comment', author: 'Stanley Yelnats'},
-  ]
+    "_id" : ObjectId("599deca93faf852212f8b01a"),
+    "author" : ObjectId("599de850b15f251fe9915be3"),
+    "title" : "Really cool blog post",
+    "content" : "Canada when I met you girl my heart went knock knock but something would be nothing. It's a Bieber world live it or die it's a Bieber world live it or die canada. It's a Bieber world live it or die man, we steppin' out like whoa no one can stop me. Swaggie I'ma make you shine bright like you're laying in the snow, burr I make good grilled cheese and I like girls.
+    "comments" : [],
 }
 ```
 
@@ -68,9 +63,11 @@ post: {
   },
   _id: '234lj23kjh', 
   content: 'This is some classy fake content', 
-  comments: [
-    {text:'This is a class comment', author: 'Stanley Yelnats'},
-  ]
+  comments: [{
+    "text" : "How cool!?!?!",
+    "author" : ObjectId("599deebe9c258a22e3211490"),
+    "_id" : ObjectId("599deec69c258a22e3211491")
+   }]
 },
 ```
 #### UPDATE '/posts/:id'
@@ -79,7 +76,11 @@ post: {
 * The data coming into this `PUT` should look like this: 
 
 ```
-  {text:'This is a class comment', author: 'AuthorId(ObjectId)'}
+ comments: [{
+   "text" : "How cool!?!?!",
+   "author" : ObjectId("599deebe9c258a22e3211490"),
+   "_id" : ObjectId("599deec69c258a22e3211491")
+ }]
 ```
 
 ### Finished Product
