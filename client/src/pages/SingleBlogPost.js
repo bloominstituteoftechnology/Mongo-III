@@ -12,6 +12,7 @@ export default class SingleBlogPost extends Component {
         _id: '234lj23kjh', 
         author: 'Patrick Saves the Day',
         content: 'This is some FAKE content', 
+        author: 'Cool Programmer',
         comments: [
           {text:'This is a FAKE comment', author: 'Stanley Yelnats'},
         ]},
@@ -33,7 +34,7 @@ export default class SingleBlogPost extends Component {
         this.setState({post: data.data});
       })
       .catch((err) => {
-        console.log('You are seeing this error because you have yet to implement the `post` to get single post', err );
+        console.log('You are seeing this error because you have yet to implement the `get` to get single post', err );
       });
   }
   
