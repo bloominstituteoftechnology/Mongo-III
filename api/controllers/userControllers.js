@@ -25,7 +25,7 @@ const findUser = (req, res) => {
     .exec((err, user) => {
       if (err) {
         res.status(STATUS_USER_ERROR);
-        res.json(err);
+        res.json({err: err.message});
       } else {
         res.json(user);
       }
