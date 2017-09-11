@@ -1,7 +1,7 @@
 {
   "name": "Mongo-III-Lab",
   "version": "1.0.0",
-  "description": "simple bloggin platform",
+  "description": "simple blogging platform",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
