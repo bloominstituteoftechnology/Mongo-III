@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 
-import { Comment } from './Comment';
+import Comment from './Comment';
 
 export default class SingleBlogPost extends Component {
   constructor() {
@@ -10,24 +10,25 @@ export default class SingleBlogPost extends Component {
       post: {
         title: 'This is a FAKE blog post title', 
         _id: '234lj23kjh', 
-        author: 'Patrick Saves the Day',
+        author: {username: 'Patrick Saves the Day'},
         content: 'This is some FAKE content', 
         comments: [
           {text:'This is a FAKE comment', author: 'Stanley Yelnats'},
         ]},
       comment: '',
+      best: true,
     };
     this.handleCommentText = this.handleCommentText.bind(this);
     this.addComment = this.addComment.bind(this);
+    this.sort = this.sort.bind(this);
   }
   
   componentDidMount() {
-    this.getBlogPost()
+    this.getBlogPost();
   }
 
   getBlogPost(){
     const { id } = this.props.match.params
-    console.log(id);
     axios.get(`http://localhost:3030/posts/${id}`)
       .then((data) => {
         this.setState({post: data.data});
@@ -40,7 +41,7 @@ export default class SingleBlogPost extends Component {
   addComment(e) {
     e.preventDefault();
     const { comment } = this.state;
-    const { id } = this.props.match.params    
+    const { id } = this.props.match.params
     const newComment = {
       text: comment,
       author: localStorage.getItem('uuID'),
@@ -60,16 +61,30 @@ export default class SingleBlogPost extends Component {
   handleCommentText(e) {
     this.setState({comment: e.target.value});
   }
+  
+  sort() {
+    const { id } = this.props.match.params
+    const { best } = this.state;
+    this.setState({ best: !this.state.best });
+    axios.patch(`http://localhost:3030/posts/${id}`, { best })
+    .then((data) => {
+      this.getBlogPost();
+    })
+    .catch((err) => {
+      console.log('Something went wront with your "GET" method on `posts/:id/sorted`')
+    })
+  }
 
   render() {
     const { title, comments, content, author } = this.state.post;
     return (
       <div>
         <h4>{title}</h4>
-        <h5>{author}</h5>
+        <h5>{author.username}</h5>
         <div>{content}</div>
+        <button onClick={this.sort}>sort</button>
         {comments.map((comment, ind) => {
-          return <Comment comment={comment} key={ind} />
+          return <Comment comment={comment} getBlogPost={this.getBlogPost.bind(this)} key={ind} />
         })}
         <p>Add comments</p>
         <form onSubmit={this.addComment}>
