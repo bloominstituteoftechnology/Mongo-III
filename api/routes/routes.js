@@ -2,13 +2,20 @@ const userControllers = require('../controllers/userControllers');
 const postControllers = require('../controllers/postControllers');
 
 module.exports = (app) => {
-  app.post('/new-user', userControllers.create);
-  app.post('/login', userControllers.find);
-  app.post('/new-post', postControllers.create);
-  app.get('/posts', postControllers.findAll);
-  app.get('/posts/:id', postControllers.find);
-  app.put('/posts/:id', postControllers.add);
-  app.put('/comment/:id', postControllers.likeAdd);
-  app.patch('/posts/:id', postControllers.sort);
-  app.get('/aggregated/', postControllers.aggregate);
+  app.route('/new-user')
+    .post(userControllers.create);
+  app.route('/login')
+    .post(userControllers.find);
+  app.route('/new-post')
+    .post(postControllers.create);
+  app.route('/posts')
+    .get(postControllers.findAll);
+  app.route('/posts/:id')
+    .get(postControllers.find)
+    .put(postControllers.add)
+    .patch(postControllers.sort);
+  app.route('/comment/:id')
+    .put(postControllers.likeAdd);
+  app.route('/aggregated/')
+    .get(postControllers.aggregate);
 };
