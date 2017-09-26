@@ -22,7 +22,7 @@ export default class SingleBlogPost extends Component {
   }
   
   componentDidMount() {
-    this.getBlogPost()
+    this.getBlogPost();
   }
 
   getBlogPost(){
@@ -30,7 +30,10 @@ export default class SingleBlogPost extends Component {
     console.log(id);
     axios.get(`http://localhost:3030/posts/${id}`)
       .then((data) => {
+        console.log(data.data);
+        console.log(this.state.post)
         this.setState({post: data.data});
+        
       })
       .catch((err) => {
         console.log('You are seeing this error because you have yet to implement the `post` to get single post', err );
