@@ -7,9 +7,10 @@ module.exports = app => {
   app.post("/login", userControllers.auth);
   app.post("/new-post", postControllers.create);
   app.get("/posts", postControllers.getAll);
+  app.post("/posts/:id/comments", postControllers.createComment);
   app
     .route("/posts/:id")
     .get(postControllers.getOne)
     .put(postControllers.updateOne);
-  app.post("/posts/:id/comments", postControllers.createComment);
+  
 };

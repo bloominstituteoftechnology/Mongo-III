@@ -6,6 +6,10 @@ const postSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "User"
   },
+  created: {
+    type: Date,
+    default: Date.now()
+  },
   title: String,
   content: String,
   comments: [{ type: Schema.Types.ObjectId, ref: "Comment" }]

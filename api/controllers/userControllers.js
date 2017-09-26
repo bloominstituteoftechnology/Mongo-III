@@ -16,6 +16,7 @@ module.exports = () => {
       User.findOne({ username })
         .exec()
         .then(user => {
+          console.log(user, username, password);
           if (user.password !== password) return utils.errHandler(403, "Incorrect username and password combination.", res);
           return user ? res.json(user) : utils.errHandler(404, "Sorry this user does not exist in our system.", res);
         })

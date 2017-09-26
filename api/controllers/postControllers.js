@@ -14,7 +14,7 @@ module.exports = () => {
     getAll: (req, res) => {
       console.log('getting all the posts')
       Post.find()
-        .populate("author, comments")
+        .populate("author comments", "username author text")
         .exec()
         .then(posts => posts ? res.json(posts) : utils.errHandler(404, "There are no posts.", res))
         .catch(err => utils.errHandler(500, "Server error retrieving your posts.", res));
@@ -22,7 +22,7 @@ module.exports = () => {
     getOne: (req, res) => {
       const { id } = req.params;
       Post.findById(id)
-        .populate('comments, author')
+        .populate('comments author', 'username')
         .exec()
         .then(post => post ? res.json(post) : utils.errHandler(404, 'This post is not found.', res))
         .catch(err => utils.errHandler(500, 'Server error retrieving post', res));
@@ -38,6 +38,7 @@ module.exports = () => {
         })
     },
     createComment: async (req, res) => {
+      console.log('Hit this endpoint', req.body);
       const { id } = req.params;
       const commentBody = {
         text: req.body.text,
