@@ -25,7 +25,7 @@ export default class CreatePost extends Component {
     const { title, content } = this.state;
     const newPost = { title, content, author: localStorage.getItem('uuID') };
     this.setState({content: '', title: ''});
-    axios.post('http://localhost:3030/new-post', newPost)
+    axios.post('http://localhost:3030/post/new', newPost)
       .then((data) => {
         const newPostId = data.data._id;
         window.location = `/posts/${newPostId}`

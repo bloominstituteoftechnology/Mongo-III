@@ -8,23 +8,23 @@ export default class Login extends Component {
   constructor(){
     super();
     this.state = {
-      userName: '',
+      email: '',
       password: '',
     }
-    this.handleSetUserName = this.handleSetUserName.bind(this);
+    this.handleSetEmail = this.handleSetEmail.bind(this);
     this.handleSetPassword = this.handleSetPassword.bind(this);
     this.loginWithUser = this.loginWithUser.bind(this);
   }
-  handleSetUserName(e) {
-    this.setState({userName: e.target.value});
+  handleSetEmail(e) {
+    this.setState({email: e.target.value});
   }
   handleSetPassword(e) {
     this.setState({password: e.target.value});
   }
   loginWithUser(e) {
     e.preventDefault();
-    const user = {username: this.state.userName, password: this.state.password};
-    axios.post('http://localhost:3030/login', user)
+    const user = {email: this.state.email, password: this.state.password};
+    axios.post('http://localhost:3030/user/login', user)
       .then((data) => {
         localStorage.setItem('uuID', data.data._id);
         setTimeout(() => {
@@ -43,10 +43,10 @@ export default class Login extends Component {
             <FormControl 
               id="formHorizontalEmail"
               className="form-control"
-              onChange={this.handleSetUserName} 
-              placeholder="User Name"
+              onChange={this.handleSetEmail} 
+              placeholder="Email"
               type="text" 
-              value={this.state.userName} 
+              value={this.state.email} 
             />
           </FormGroup>
           <FormGroup className="Login-group" controlId="formHorizontalPassword">
@@ -55,7 +55,7 @@ export default class Login extends Component {
               id="formHorizontalPassword"
               className="form-control"
               onChange={this.handleSetPassword} 
-              placeholder="password"
+              placeholder="Password"
               type="password" 
               value={this.state.password} 
             />
