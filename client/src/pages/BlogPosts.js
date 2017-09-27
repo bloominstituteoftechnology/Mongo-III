@@ -14,7 +14,7 @@ export default class BlogPosts extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:3030/posts')
+    axios.get('http://localhost:3030/post')
       .then((data) => {
         this.setState({posts: data.data});
       })

@@ -8,23 +8,23 @@ export default class CreateAccount extends Component {
   constructor(){
     super();
     this.state = {
-      username: '',
+      email: '',
       password: '',
+      firstName: '',
+      lastName: ''
     }
-    this.handleSetusername = this.handleSetusername.bind(this);
-    this.handleSetPassword = this.handleSetPassword.bind(this);
+    this.handleSet = this.handleSet.bind(this);
     this.createUser = this.createUser.bind(this);
   }
-  handleSetusername(e) {
-    this.setState({username: e.target.value});
-  }
-  handleSetPassword(e) {
-    this.setState({password: e.target.value});
+  handleSet(e) {
+    const { name, value } = e.target;
+    this.setState({[name]: value});
   }
   createUser(e) {
     e.preventDefault();
-    const userToSave = {username: this.state.username, password: this.state.password};
-    axios.post('http://localhost:3030/new-user', userToSave)
+    const { email, password, firstName, lastName } = this.state;
+    const userToSave = { email, password, firstName, lastName};
+    axios.post('http://localhost:3030/user/new', userToSave)
       .then((data) => {
         localStorage.setItem('uuID', data.data._id);
         setTimeout(() => {
@@ -39,27 +39,53 @@ export default class CreateAccount extends Component {
     return (
       <form className="Login-form">
         <FormGroup className="Login-group" controlId="formHorizontalEmail">
-            User Name
-            <FormControl 
-              id="formHorizontalEmail"
-              className="form-control"
-              onChange={this.handleSetusername} 
-              placeholder="User Name"
-              type="text" 
-              value={this.state.username} 
-            />
-          
-          </FormGroup>
-          <FormGroup className="Login-group" controlId="formHorizontalPassword">
-            Password
-            <FormControl 
-              id="formHorizontalPassword"
-              className="form-control"
-              onChange={this.handleSetPassword} 
-              placeholder="password"
-              type="password" 
-              value={this.state.password} 
-            />
+          User Name
+          <FormControl 
+            id="formHorizontalEmail"
+            className="form-control"
+            onChange={this.handleSet} 
+            name="email"
+            placeholder="Email"
+            type="email" 
+            value={this.state.email} 
+          />
+        
+        </FormGroup>
+        <FormGroup className="Login-group" controlId="formHorizontalPassword">
+          Password
+          <FormControl 
+            id="formHorizontalPassword"
+            className="form-control"
+            onChange={this.handleSet}
+            name="password"
+            placeholder="Password"
+            type="password" 
+            value={this.state.password} 
+          />
+        </FormGroup>
+        <FormGroup className="Login-group" controlId="formHorizontalFirstName">
+          First Name
+          <FormControl 
+            id="formHorizontalFirstName"
+            className="form-control"
+            onChange={this.handleSet}
+            name="firstName" 
+            placeholder="First Name"
+            type="text" 
+            value={this.state.firstName} 
+          />
+        </FormGroup>
+        <FormGroup className="Login-group" controlId="formHorizontalLastName">
+          Last Name
+          <FormControl 
+            id="formHorizontalLastName"
+            className="form-control"
+            onChange={this.handleSet}
+            name="lastName" 
+            placeholder="Last Name"
+            type="text" 
+            value={this.state.lastName} 
+          />
           <Link to="/">Already a member? Login here.</Link>
           <br/>
           <button className="btn btn-default" onClick={this.createUser}>Create Account</button>
