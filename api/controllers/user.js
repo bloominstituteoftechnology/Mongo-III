@@ -1,14 +1,15 @@
 const mongoose = require('mongoose');
-const { handleErr, loginErr } = require('../helpers');
+const bcrypt = require('bcrypt');
+const { hashPass, comparePass, handleErr, loginErr } = require('../helpers');
 
 const User = require('../models/user');
 
 module.exports = {
-  // TODO: auth? hash password?
   newUser: async (req, res) => {
     const { username, password } = req.body;
     try {
-      const newUser = new User({ username, password });
+      const hashed = await hashPass(password);
+      const newUser = new User({ username, password: hashed });
       const user = await newUser.save();
       res.status(201).json(user);
     } catch (err) {
@@ -22,8 +23,8 @@ module.exports = {
     try {
       const user = await User.findOne({ username });
       if (!user) return loginErr(res);
-      if (user.password !== password) return loginErr(res);
-      res.status(200).json(user);
+      const compared = await comparePass(password, user.password);
+      return compared ? res.status(200).json(user) : loginErr(res);
     } catch (err) {
       handleErr(500, err.message, res);
     }

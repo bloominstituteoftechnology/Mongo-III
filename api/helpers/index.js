@@ -1,6 +1,11 @@
+const bcrypt = require('bcrypt');
 const Post = require('../models/post.js');
 
 module.exports = {
+  hashPass: async (password) => await bcrypt.hash(password, 11),
+
+  comparePass: async (password, hash) => await bcrypt.compare(password, hash),
+
   handleErr: (status, message, res) =>
     res.status(status).json({ Error: message }),
 
