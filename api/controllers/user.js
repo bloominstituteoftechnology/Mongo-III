@@ -1,7 +1,5 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
 const { hashPass, comparePass, handleErr, loginErr } = require('../helpers');
-
 const User = require('../models/user');
 
 module.exports = {

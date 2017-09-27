@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const { handleErr, getPost } = require('../helpers');
-
 const Post = require('../models/post');
 const User = require('../models/user');
 const Comment = require('../models/comment');

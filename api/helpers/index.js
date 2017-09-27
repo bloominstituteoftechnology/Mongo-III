@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const Post = require('../models/post.js');
 
 module.exports = {
-  hashPass: async (password) => await bcrypt.hash(password, 11),
+  hashPass: async password => await bcrypt.hash(password, 11),
 
   comparePass: async (password, hash) => await bcrypt.compare(password, hash),
 
@@ -16,7 +16,6 @@ module.exports = {
 
   getPost: async (id, res) => {
     const post = await Post.findById(id).populate('comments');
-    if (!post) return handleErr(422, 'Invalid post ID', res);
-    return post;
+    return post ? post : handleErr(422, 'Invalid post ID', res);
   }
 };
