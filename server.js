@@ -5,6 +5,9 @@ const cors = require('cors');
 const port = process.env.PORT || 3030;
 const server = express();
 
+const handler = require('./api/helpers');
+const routes = require('./api/routes/routes');
+
 const corsOptions = {
   origin: '*',
   methods: 'GET, HEAD, PUT, PATCH, POST, DELETE',
@@ -29,8 +32,11 @@ server.use((req, res, next) => {
   next();
 });
 
-const routes = require('./api/routes/routes');
 server.use('/', routes);
+server.use(handler.notFound);
+server.use(handler.validationErrors);
+if (server.get('env') === 'development') server.use(handler.dHandleErrors);
+server.use(handler.pHandleErrors);
 
 server.listen(port, () => {
   console.log(`Server up and running on ${port}`);

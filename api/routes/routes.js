@@ -1,32 +1,33 @@
 const express = require('express');
 const postControllers = require('../controllers/post');
 const userControllers = require('../controllers/user');
+const { catchErrors } = require('../helpers');
 
 const router = express.Router();
 
 router
   .route('/new-user')
-  .post(userControllers.newUser);
+  .post(catchErrors(userControllers.newUser));
 
 router
   .route('/login')
-  .post(userControllers.login);
+  .post(catchErrors(userControllers.login));
 
 router
   .route('/new-post')
-  .post(postControllers.newPost);
+  .post(catchErrors(postControllers.newPost));
 
 router
   .route('/posts')
-  .get(postControllers.getPosts);
+  .get(catchErrors(postControllers.getPosts));
 
 router
   .route('/posts/:id')
-  .get(postControllers.getPost)
-  .put(postControllers.newComment);
+  .get(catchErrors(postControllers.getPost))
+  .put(catchErrors(postControllers.newComment));
 
 router
   .route('/posts/:id/comments')
-  .post(postControllers.newComment);
+  .post(catchErrors(postControllers.newComment));
 
 module.exports = router;
