@@ -31,7 +31,7 @@ export default class BlogPosts extends Component {
         {posts.map((post) => {
           return (
               <div key={post._id}>
-                <Link to={`posts/${post._id}`}>{post.title}</Link>
+                <Link to={`/posts/${post._id}`}>{post.title}</Link>
               </div>
             )
         })}
