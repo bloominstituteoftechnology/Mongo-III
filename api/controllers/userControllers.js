@@ -17,7 +17,7 @@ const createUser = async (req, res) => {
 const loginUser = async (req, res) => {
   const { username, password } = req.body;
   try {
-    const user = User.find({ username, password });
+    const user = await User.find({ username, password });
     return res.json(user[0]);
   } catch (error) {
     return res
@@ -25,3 +25,5 @@ const loginUser = async (req, res) => {
       .json({ stack: error.stack, message: error.message });
   }
 };
+
+module.exports = { createUser, loginUser };
