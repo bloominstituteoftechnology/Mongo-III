@@ -27,9 +27,9 @@ export default class SingleBlogPost extends Component {
 
   getBlogPost(){
     const { id } = this.props.match.params
-    console.log(id);
     axios.get(`http://localhost:3030/posts/${id}`)
       .then((data) => {
+        data.data.author = data.data.author.username;
         this.setState({post: data.data});
       })
       .catch((err) => {
