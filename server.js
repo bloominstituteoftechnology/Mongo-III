@@ -1,6 +1,7 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const mongoose = require('mongoose');
+mongoose.set('debug', true);
 const cors = require('cors');
 const port = process.env.PORT || 3030;
 const server  = express();
