@@ -11,6 +11,10 @@
     "body-parser": "^1.17.2",
     "cors": "^2.8.4",
     "express": "^4.15.4",
+    "global": "^4.3.2",
     "mongoose": "^4.11.7"
+  },
+  "devDependencies": {
+    "nodemon": "^1.12.1"
   }
 }
