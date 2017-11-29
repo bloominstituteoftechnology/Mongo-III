@@ -42,7 +42,6 @@ class App extends Component {
         <Route path="/posts" exact component={ Pages.BlogPosts }></Route>
         <Route path="/posts/:id" component={ Pages.SingleBlogPost }></Route>
         <Route path="/new-post" component={ Pages.CreatePost }></Route>
-
       </div>
     );
   }
