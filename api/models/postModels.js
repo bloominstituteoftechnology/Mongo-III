@@ -3,8 +3,7 @@ const mongoose = require('mongoose');
 const commentSchema = new mongoose.Schema({
   author: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
+    ref: 'User'
   },
   text: {
     type: String,
@@ -15,8 +14,7 @@ const commentSchema = new mongoose.Schema({
 const PostSchema = new mongoose.Schema({
   author : { 
     type: mongoose.Schema.Types.ObjectId, 
-    ref: 'User',
-    required: true
+    ref: 'User'
   },
   title: {
     type: String,
