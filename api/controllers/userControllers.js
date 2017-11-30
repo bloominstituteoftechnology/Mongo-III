@@ -22,6 +22,7 @@ const createUser = (req, res) => {
 
 const userLogin = (req, res) => {
   const { username, password } = req.body;
+  
   User.findOne({ username, password })
     .select('username')
     .exec()

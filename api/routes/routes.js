@@ -12,4 +12,16 @@ module.exports = (app) => {
     .post(userControllers.userLogin);
 
   /* POST ROUTES */
+  app
+    .route('/new-post')
+    .post(postControllers.createPost);
+
+  app
+    .route('/posts')
+    .get(postControllers.listPosts);
+
+  app
+    .route('/posts/:id')
+    .get(postControllers.getPostById)
+    .post(postControllers.addPostComment);
 };
