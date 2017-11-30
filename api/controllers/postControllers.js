@@ -49,17 +49,19 @@ const listPosts = (req, res) => {
       res.status(statusCodes.serverError).json({ error: err.message });
     });
 };
-
+/* eslint-disable no-underscore-dangle */
 const findPost = (req, res) => {
-  const { postID } = req.params;
-  log(`findPost postID: ${postID}`);
+  const { id: postID } = req.params;
+  console.log(`findPost postID: ${postID}`);
+  console.log(`req.params.id: ${req.params.id}`);
   Post.findById(postID)
-  .populate('comments', 'text')
+  .populate('comments')
   .exec()
   .then((post) => {
     res.json(post);
   })
   .catch((err) => {
+    console.log('findPost err:', err.message);
     res.status(statusCodes.userError).json({ error: `not found: ${err.message}` });
   });
 };
