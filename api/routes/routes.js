@@ -1,3 +1,22 @@
+const { createUser, login } = require('../controllers/userControllers.js');
+const {
+  createPost,
+  listPosts,
+  getPost,
+  updatePost,
+  addComment,
+} = require('../controllers/postControllers.js');
+
 module.exports = (app) => {
-  //add your new routes here
+  app.post('/new-user', createUser);
+  app.post('/login', login);
+
+  app.post('/new-post', createPost);
+  app.get('/posts', listPosts);
+  app
+    .route('/posts/:id')
+    .get(getPost)
+    .put(updatePost);
+
+  app.post('/posts/:id/comments', addComment);
 };
