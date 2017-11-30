@@ -72,10 +72,31 @@ const updatePost = (req, res) => {
     })
     .catch(err => res.status(500).json(err));
 };
+const addComment = (req, res) => {
+  const { id } = req.params;
+  const { text } = req.body;
+
+  const newComment = new Comment ({ parentID: id, author, text });
+
+  newComment
+    .save()
+    .catch(err => res.status(422).json(err));
+
+  Post
+    .findById(id)
+    .exec()
+    .then((post) => {
+      post.comments.push(newComment);
+      post.save();
+      res.json(newComment);
+    })
+    .catch(err => res.status(500).json(err));
+};
 
 module.exports = {
   createPost,
   listPosts,
   getPost,
   updatePost,
+  addComment,
 };

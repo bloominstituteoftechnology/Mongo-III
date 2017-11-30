@@ -4,6 +4,7 @@ const {
   listPosts,
   getPost,
   updatePost,
+  addComment,
 } = require('../controllers/postControllers.js');
 
 module.exports = (app) => {
@@ -16,4 +17,6 @@ module.exports = (app) => {
     .route('/posts/:id')
     .get(getPost)
     .put(updatePost);
+
+  app.post('/posts/:id/comments', addComment);
 };
