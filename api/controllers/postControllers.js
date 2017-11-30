@@ -22,7 +22,9 @@ const PostController = {
     getPost: async (req, res) => {
         try {
            const { id } = req.params;
-           const post = await Post.findOne({ _id: id}).populate('author').populate('comments').exec();
+           const post = await Post.findOne({ _id: id})
+           .populate('author')
+           .populate('comments').exec();
             res.json(post);
         } catch (error) {
             res.status(422).json({ error });
