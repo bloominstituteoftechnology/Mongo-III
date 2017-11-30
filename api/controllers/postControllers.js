@@ -34,7 +34,7 @@ const getAllBlogPosts = (req, res) => {
 const getPostById = (req, res) => {
     const { id } = req.params; 
     Post.findById(id)
-    .populate('author comments.author', 'username')
+    .populate('comments.author', 'author.username')
     .exec((err, post) => {
         if (err) {
             res.status(422);
@@ -54,11 +54,11 @@ const addCommentsToPost = (req, res) => {
         post.save((errTwo, newPostSave) => {
             if(errTwo) {
                 res.status(422);
-                res.json({'Error inserting comments: ': errTwo.merssage});
+                res.json({'Error inserting comments: ': errTwo.message});
                 return;
             }
             Post.findById(newPostSave._id)
-            .populate('comments.author', 'username')
+            .populate('comments.author', 'username') //.populate('author author.comments')
             .exec((errLast, lastPost) => {
                 if(errLast) {
                     res.status(422);
