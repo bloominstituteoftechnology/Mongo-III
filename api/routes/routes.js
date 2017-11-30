@@ -1,8 +1,15 @@
-const controllerMethods = require('../controllers/postControllers');
+const postControllers = require('../controllers/postControllers');
+const userControllers = require('../controllers/userControllers');
 
-module.exports = (app) => {
-  //add your new routes here
+module.exports = (app) => { 
+  /* USER ROUTES */
   app
-    .route('/')
-    .post(controllerMethods.listPosts);
+    .route('/new-user')
+    .post(userControllers.createUser);
+
+  app
+    .route('/login')
+    .post(userControllers.userLogin);
+
+  /* POST ROUTES */
 };
