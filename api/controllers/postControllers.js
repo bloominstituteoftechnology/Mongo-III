@@ -18,8 +18,33 @@ const postGetAll = (req, res) => {
     })
     .catch(err => res.status(422).json(err));
 };
-const postGetById = (req, res) => {};
-const postCommentAdd = (req, res) => {};
+const postGetById = (req, res) => {
+    const { id } = req.params;
+    Post.findById(id)
+    .populate('author', 'username')
+    .exec()
+    .then((singlePost) => {
+        if (singlePost === null) throw new Error();
+        res.json(singlePost);
+    })
+    .catch(err => res.status(422).json(err));
+};
+const postCommentAdd = (req, res) => {
+    const { id } = req.params;
+    const { author, text } = req.body;
+    const comment = { author, text };
+    post.findById(id)
+    .then(post => {
+        if(post === null) throw new Error();
+        const comments = post.comments;
+        comments.push(comments);
+        post.save({new: true}).then(newPost => res.json(newPost))
+        .catch(err => res.status(422).json({ error: 'bad'}));
+    })
+    .catch(err => {
+        res.status(422).json({error: 'No Post!'})
+    });
+};
 
 module.exports = {
     postCreate,

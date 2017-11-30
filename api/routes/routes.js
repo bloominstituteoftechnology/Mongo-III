@@ -5,7 +5,7 @@ module.exports = (app) => {
   app.route('/new-user').post(userControllers.userCreate);
   app.route('/login').post(userControllers.userLogin);
   app.route('/new-post').post(postControllers.postsGetAll);
-  app.route('/post/id:')
-    .get(postControllers.postGetById);
+  app.route('/posts/id:')
+    .get(postControllers.postGetById)
     .put(postControllers.postCommentAdd);
 };
