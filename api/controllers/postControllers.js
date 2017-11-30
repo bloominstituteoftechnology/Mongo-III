@@ -13,7 +13,7 @@ const PostController = {
     },
     getPosts: async (req, res) => {
         try {
-            const posts = await Post.find({}).select('_id title').exec();
+            const posts = await Post.find({}).populate('comments').select('_id title comments').exec();
             res.json(posts);
         } catch (error) {
             res.status(422).json({ error });
@@ -36,13 +36,36 @@ const PostController = {
             const { text, author } = req.body;
 
             const post = await Post.findOne({ _id: id}).exec();
-            const comment = new Comment({ text, author });
+            const comment = new Comment({ parent: post, text, author });
 
             const savedComment = await comment.save();
             post.comments.push(savedComment);
             
             const savedPost = await post.save();
             res.json(savedComment);
+        } catch (error) {
+            res.status(422).json({ error });
+        }
+    },
+    addComments: async (req, res) => {
+        try {
+            const { id } = req.params;
+            const { comments = [] } = req.body;
+            if(!comments.length) {
+                throw { message: 'No comments were provided' };
+            }
+            const post = await Post.findOne({ _id: id }).exec();
+            
+            const newComments = comments.map(async comment => {
+                const newComment = new Comment({parent: post, ...comment});
+                return await newComment.save();
+            });
+            
+            const saved = await Promise.all(newComments);
+
+            post.comments = [...post.comments, ...saved];
+            const savedPost = await post.save();
+            res.json(savedPost);
         } catch (error) {
             res.status(422).json({ error });
         }

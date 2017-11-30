@@ -18,6 +18,11 @@ const PostSchema = new Mongoose.Schema({
 });
 
 const CommentSchema = new Mongoose.Schema({
+    parent: {
+        type: Mongoose.Schema.Types.ObjectId,
+        ref: 'Post',
+        required: true
+    },
     author: {
         type: Mongoose.Schema.Types.ObjectId,
         ref: 'User',

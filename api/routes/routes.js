@@ -7,6 +7,6 @@ module.exports = (app) => {
   app.route('/login').post(UserController.login);
   app.route('/new-post').post(PostController.createPost);
   app.route('/posts').get(PostController.getPosts);
-  app.route('/posts/:id').get(PostController.getPost)
-  .put(PostController.addComment);
+  app.route('/posts/:id').get(PostController.getPost).put(PostController.addComment);
+  app.route('/posts/:id/comments').post(PostController.addComments);
 };
