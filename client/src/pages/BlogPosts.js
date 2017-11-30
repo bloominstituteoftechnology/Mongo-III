@@ -7,8 +7,8 @@ export default class BlogPosts extends Component {
     super();
     this.state = {
       posts: [
-        {title: 'This is a fake post', _id: '325kjlljh'},
-        {title: 'This is another fake post', _id: '234sdjlk'}
+        {author: { username: '' }, title: 'This is a fake post', _id: '325kjlljh'},
+        {author: { username: '' }, title: 'This is another fake post', _id: '234sdjlk'}
       ],
     };
   }
@@ -32,6 +32,7 @@ export default class BlogPosts extends Component {
           return (
               <div key={post._id}>
                 <Link to={`posts/${post._id}`}>{post.title}</Link>
+                <p>by {post.author.username}</p>
               </div>
             )
         })}

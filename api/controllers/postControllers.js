@@ -27,10 +27,8 @@ const getPost = (req, res) => {
     .populate('author', 'username')
     .populate({
       path: 'comments',
-      model: 'comment',
       populate: {
         path: 'author',
-        model: 'user',
         select: 'username',
       },
     })
