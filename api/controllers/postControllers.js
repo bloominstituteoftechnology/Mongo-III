@@ -56,7 +56,7 @@ const updatePost = (req, res) => {
   const { id } = req.params;
   const { author, text } = req.body;
 
-  const newComment = new Comment({ author, text });
+  const newComment = new Comment({ parentId: id, author, text });
 
   newComment
     .save()
