@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
 const User = require('../models/userModels');
 
 const STATUS_USER_ERROR = 422;
@@ -18,20 +18,20 @@ const createUser = (req, res) => {
 };
 const findUser = (req, res) => {
   const { username, password } = req.body;
-  User.findOne({username}, (err1, foundUserName) => {
-    if (err1 || !foundUserName) {
-      res.status(STATUS_USER_ERROR).json({ error: "Could not find user ID" });
-      return;
-    }
-    User.findOne({password}, (err2, foundPassword) => {
-      if (err2 || !foundPassword) {
-        res.status(STATUS_USER_ERROR).json({ error: "Could not find user password" });
-        return;
+  User.findOne({username, password})
+    .select('username')
+    .exec()
+    .then((user) => {
+      if (user === null) {
+        res.status(422).json({error: err.message})
       }
-      res.json({ Login: "was successful!" });
+      res.json(user);
+    })
+    .catch((err) => {
+      res.status(STATUS_USER_ERROR).json(err);
+      return;
     });
-  });
-}
+};
 
 module.exports = {
   createUser,
