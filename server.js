@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const port = process.env.PORT || 3030;
 const server  = express();
+const User = require('./api/models/userModels');
 
 const corsOptions = {
     "origin": "*",
@@ -26,8 +27,18 @@ server.use((req, res, next) => {
     next();
 });
 
-const routes = require('./api/routes/routes');
-routes(server);
+server.post('/new-user', function(req, res){
+  	let newUser = req.body;
+  	let user = new User(newUser);
+  	user.save().then(savedUser => {
+  		res.json(savedUser);
+  	}).catch(err => {
+  		res.json(err);
+  	});
+});
+
+// const routes = require('./api/routes/routes');
+// routes(server);
 
 server.listen(port, () => {
   console.log(`Server up and running on ${port}`);
