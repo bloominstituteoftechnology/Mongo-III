@@ -74,7 +74,9 @@ server.get('/posts', function(req, res) {
 })
 
 server.get('/posts/:id', function(req, res) {
-   Post.findById(req.params.id).populate("comments").then(post => {
+   Post.findById(req.params.id)
+   .populate('comments')
+   .then(post => {
    	res.json(post);
    }).catch(err => {
    	res.json(err);
@@ -82,7 +84,6 @@ server.get('/posts/:id', function(req, res) {
 })
 
 server.put('/posts/:id', function(req, res) {
-    console.log(req.body);
     const id = req.params.id;
     const newComment = {
         text : req.body.text,
@@ -91,18 +92,15 @@ server.put('/posts/:id', function(req, res) {
     }
     let comment = new Comments(newComment);
     comment.save().then(savedComment => {
-        res.json(savedComment);
+
+    	Post.findByIdAndUpdate(id, { "$push": { "comments":  savedComment._id}}, { "new": true })
+    	.then(updatedPost => {
+    		console.log(updatedPost);
+    		res.json(updatedPost);
+    	}).catch(); 
     }).catch(err => {
         res.json(err);
     });
-
-    // Post.findByIdAndUpdate(id, { "$push": { "comments":  newComment}}, { "new": true })
-    // .then(post => {
-    //     res.json(post);
-    // })
-    // .catch(err => {
-    //     res.json(err);
-    // });
 })
 
 // const routes = require('./api/routes/routes');
