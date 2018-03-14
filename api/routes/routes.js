@@ -1,18 +1,17 @@
-module.exports = (app) => {
+const postControllers = require("../controllers/postControllers");
+const userControllers = require("../controllers/userControllers");
+
+module.exports = app => {
   //add your new routes here
+  app.route("/new-user").post(userControllers.addUser);
 
-  Router.get('/', function(req, res) {}); //login page. Submits a POST request to find a user in the DB and send that response back to the client. 
+  app.route("/login").post(userControllers.userLogin);
 
+  app.route("/new-post").post(postControllers);
 
-  Router.____('/create-user', function(req, res) {}); // create user form. 
-  
-  Router.get('/posts', function(req, res) {
+  app.route("/posts").get(postControllers);
 
-  }); // display all of the blog posts in the DB. 
+  app.route("/posts/:id").get(postControllers);
 
-  Router.get(/posts:id, function(req, res) {
-    git
-  }); // navigate to the single blog post page. 
-  
-  Router.____(/new-post, function(req, res) {}); // create a new blog post. 
+  app.route("/posts/:id").update(postControllers);
 };
