@@ -6,6 +6,7 @@ const port = process.env.PORT || 3030;
 const server  = express();
 const User = require('./api/models/userModels');
 const Post = require('./api/models/postModels');
+const Comments = require('./api/models/commentsModels');0
 
 const corsOptions = {
     "origin": "*",
@@ -62,6 +63,7 @@ server.post('/new-post', function(req, res){
 
 server.get('/posts', function(req, res) {
     Post.find()
+    .populate("comments")
     .then(post => {
         console.log(post);
         res.json(post);
@@ -72,7 +74,7 @@ server.get('/posts', function(req, res) {
 })
 
 server.get('/posts/:id', function(req, res) {
-   Post.findById(req.params.id).then(post => {
+   Post.findById(req.params.id).populate("comments").then(post => {
    	res.json(post);
    }).catch(err => {
    	res.json(err);
@@ -80,20 +82,27 @@ server.get('/posts/:id', function(req, res) {
 })
 
 server.put('/posts/:id', function(req, res) {
+    console.log(req.body);
     const id = req.params.id;
     const newComment = {
         text : req.body.text,
         author : req.body.author,
-        _id : id,
+        parent : id,
     }
-
-    Post.findByIdAndUpdate(id, { "$push": { "comments":  newComment}}, { "new": true })
-    .then(post => {
-        res.json(post);
-    })
-    .catch(err => {
+    let comment = new Comments(newComment);
+    comment.save().then(savedComment => {
+        res.json(savedComment);
+    }).catch(err => {
         res.json(err);
     });
+
+    // Post.findByIdAndUpdate(id, { "$push": { "comments":  newComment}}, { "new": true })
+    // .then(post => {
+    //     res.json(post);
+    // })
+    // .catch(err => {
+    //     res.json(err);
+    // });
 })
 
 // const routes = require('./api/routes/routes');
