@@ -87,7 +87,7 @@ server.put('/posts/:id', function(req, res) {
         _id : id,
     }
 
-    Post.findByIdAndUpdate(id, { "$push": { "comment":  newComment}}, { "new": true })
+    Post.findByIdAndUpdate(id, { "$push": { "comments":  newComment}}, { "new": true })
     .then(post => {
         res.json(post);
     })

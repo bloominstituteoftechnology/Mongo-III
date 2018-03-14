@@ -14,7 +14,7 @@ const PostModel = new mongoose.Schema({
 		type: String,
 		required: true
 	},
-	comment: {
+	comments: {
 		type: Array
 	}
 });
