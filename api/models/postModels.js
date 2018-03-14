@@ -7,7 +7,7 @@ const Comment = require('./commentModels');
 const PostSchema = new mongoose.Schema({
   author: {
     type: ObjectId,
-    ref: User,
+    ref: User.username,
   },
   title: {
     type: String,
@@ -15,16 +15,15 @@ const PostSchema = new mongoose.Schema({
   },
   content: {
     type: String,
-    validate: {
-      validator: passwordLength,
-      message: 'Password must be at least four characters long.',
-    },
     required: true,
   },
   comments: [
     {
-      type: ObjectId,
-      ref: Comment,
+      text: String,
+      author: {
+        type: ObjectId,
+        ref: User.username,
+      },
     },
   ],
 });

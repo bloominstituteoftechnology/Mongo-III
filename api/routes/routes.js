@@ -4,4 +4,8 @@ const postControllers = require('../controllers/postControllers');
 module.exports = app => {
   app.route('/new-user').post(userControllers.userCreate);
   app.route('/login').post(userControllers.userLogin);
+  app.route('/new-post').post(postControllers.postCreate);
+  app.route('/posts').get(postControllers.postGetAll);
+  app.route('/posts/:id').get(postControllers.postGetById);
+  app.route('/posts/:id').put(postControllers.postUpdate);
 };
