@@ -13,7 +13,7 @@ const corsOptions = {
 };
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/blog-posts', { useMongoClient: true });
+mongoose.connect('mongodb://localhost/blog-posts');
 
 server.use(bodyParser.urlencoded({extended: true}));
 server.use(bodyParser.json());
