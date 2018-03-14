@@ -79,6 +79,22 @@ server.get('/posts/:id', function(req, res) {
    });
 })
 
+server.put('/posts/:id', function(req, res) {
+    const id = req.params.id;
+    const newComment = {
+        text : req.body.text,
+        author : req.body.author,
+        _id : id,
+    }
+
+    Post.findByIdAndUpdate(id, { "$push": { "comment":  newComment}}, { "new": true })
+    .then(post => {
+        res.json(post);
+    })
+    .catch(err => {
+        res.json(err);
+    });
+})
 
 // const routes = require('./api/routes/routes');
 // routes(server);
