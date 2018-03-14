@@ -37,6 +37,18 @@ server.post('/new-user', function(req, res){
   	});
 });
 
+server.post('/login', function(req, res) {
+    const username = req.body.username;
+
+    User.find({ username: username })
+    .then(user => {
+        res.json(user);
+    })
+    .catch(err => {
+        res.json(err);
+    });
+});
+
 // const routes = require('./api/routes/routes');
 // routes(server);
 
