@@ -17,4 +17,12 @@ postRouter.post('/new-post', (req, res) => {
     });
 });
 
+postRouter.get('/posts', (req, res) => {
+	Post.find()
+		.then(posts => {
+			console.log(posts);
+			res.status(200).json(posts)
+		})
+})
+
 module.exports = postRouter;
