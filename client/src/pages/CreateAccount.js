@@ -32,7 +32,7 @@ export default class CreateAccount extends Component {
         }, 200);
       })
       .catch((err) => {
-        console.log({'error': err.response.error});
+        console.log({'error': err.response});
       });
   }
   render() {
