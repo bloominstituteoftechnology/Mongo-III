@@ -1,7 +1,11 @@
 const mongoose = require('mongoose');
 
+//user model will be required here 
+
 const PostSchema = new mongoose.Schema({
   author: {
+      //type: mongoose.Schema.Type.ObjectID
+      //ref: 'user model name required',
     type: String,
     required: true,
   },
@@ -10,10 +14,15 @@ const PostSchema = new mongoose.Schema({
     default: 'Untitled'
   },
   content: {
-    type: String
+    type: String,
+    validate: contentSize
   },
   comments: []
 });
+
+function contentSize(content) {
+    return content.length > 0;
+};
 
 const PostModel = mongoose.model('Post', PostSchema);
 
