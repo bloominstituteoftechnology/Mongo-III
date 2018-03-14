@@ -62,6 +62,17 @@ server.post('/new-post', function(req, res){
 
 // - `'/posts'` this route will display all of the blog posts in the DB. Just the title will be shown. Each post will be a link to a 'single' blog post page.
 
+server.get('/posts', function(req, res) {
+    Post.find()
+    .then(post => {
+        console.log(post);
+        res.json(post);
+    })
+    .catch(err => {
+        res.json(err);
+    });
+})
+
 // const routes = require('./api/routes/routes');
 // routes(server);
 
