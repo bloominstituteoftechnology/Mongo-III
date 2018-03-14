@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const PostModel = new mongoose.Schema({
 	author: {
@@ -18,5 +19,4 @@ const PostModel = new mongoose.Schema({
 	}
 });
 
-const PostModel = mongoose.model('Post', PostSchema);
-module.exports = Post;
+module.exports = mongoose.model('Post', PostModel);

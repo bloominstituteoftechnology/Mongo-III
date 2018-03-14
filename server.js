@@ -5,6 +5,7 @@ const cors = require('cors');
 const port = process.env.PORT || 3030;
 const server  = express();
 const User = require('./api/models/userModels');
+const Post = require('./api/models/postModels');
 
 const corsOptions = {
     "origin": "*",
@@ -42,12 +43,24 @@ server.post('/login', function(req, res) {
 
     User.find({ username: username })
     .then(user => {
-        res.json(user);
+        res.json(user[0]);
     })
     .catch(err => {
         res.json(err);
     });
 });
+
+server.post('/new-post', function(req, res){
+  	let newPost = req.body;
+  	let post = new Post(newPost);
+  	post.save().then(savedPost => {
+  		res.json(savedPost);
+  	}).catch(err => {
+  		res.json(err);
+  	});
+});
+
+// - `'/posts'` this route will display all of the blog posts in the DB. Just the title will be shown. Each post will be a link to a 'single' blog post page.
 
 // const routes = require('./api/routes/routes');
 // routes(server);
