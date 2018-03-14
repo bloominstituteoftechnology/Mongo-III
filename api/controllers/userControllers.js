@@ -33,7 +33,7 @@ userRouter.post('/login', (req, res) => {
           message: 'The user could not be found',
         });
       }
-      res.status(200).json(foundUser);
+      res.status(200).json(foundUser[0]);
     })
     .catch(err => {
       res
