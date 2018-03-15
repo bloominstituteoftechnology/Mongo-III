@@ -48,21 +48,20 @@ module.exports = (appRouter) => {
 
     appRouter.get('/posts/:id', (req, res) => {
         PostModel.findById(req.params.id)
-            .then(post => res.status(200).send(post))
-            .catch(err => res.status(400).send({
-                error: `The information could not be reached /posts/:id. ${err}`
-            }));
+            .populate('author')
+            .exec((err, post) => {
+                res.status(200).send(post)
+            });
     });
 
     appRouter.put('/posts/:id', (req, res) => {
         console.log('req.body:::', req.body);
 
         PostModel.findByIdAndUpdate(req.params.id, req.body, { runValidators: true })
-            .then(post => res.status(200).send(post))
+            .then(post => res.status(201).send(post))
             .catch(err => res.status(400).send({
                 error: `The information could not be reached /posts/:id. ${err}`
             }));
     });
-
 
 };
