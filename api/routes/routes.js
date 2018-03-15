@@ -23,15 +23,10 @@ module.exports = (userRouter) => {
 
     userRouter.post('/login', (req, res) => {
         const user = new UserModel(req.body);
-        UserModel.findOne({$and:[
-                                    {username: user.username},
-                                    {password: user.password}
-                                ]}
-            )
+        UserModel.findOne({$and: [{username: user.username}, {password: user.password}]})
             .then(usr => (usr === null ? res.status(401).send() : res.status(200).send(usr)))
             .catch(err => {
                 res.status(500).send({error: "Something went wrong login you in. Try again.", info: err});
             });
     });
-
 };
