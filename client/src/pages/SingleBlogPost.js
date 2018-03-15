@@ -8,12 +8,12 @@ export default class SingleBlogPost extends Component {
         super();
         this.state = {
             post: {
-                title: 'This is a FAKE blog post title',
-                _id: '234lj23kjh',
-                author: 'Patrick Saves the Day',
-                content: 'This is some FAKE content',
+                title: '',
+                _id: '',
+                author: '',
+                content: '',
                 comments: [
-                    {text: 'This is a FAKE comment', author: 'Stanley Yelnats'},
+                    {text: 'This is a FAKE comment', author: '----'},
                 ]
             },
             comment: '',
@@ -30,7 +30,6 @@ export default class SingleBlogPost extends Component {
         const {id} = this.props.match.params;
         axios.get(`http://localhost:3030/posts/${id}`)
             .then((data) => {
-                console.log(data.data);
                 this.setState({post: data.data});
             })
             .catch((err) => {
@@ -41,10 +40,11 @@ export default class SingleBlogPost extends Component {
     addComment(e) {
         e.preventDefault();
         const {comment} = this.state;
-        const {id} = this.props.match.params
+        const {id} = this.props.match.params;
         const newComment = {
             text: comment,
             author: localStorage.getItem('uuID'),
+            _id: id,
         };
         this.setState({comment: ''});
         axios.put(`http://localhost:3030/posts/${id}`, newComment)
@@ -54,7 +54,7 @@ export default class SingleBlogPost extends Component {
                 }, 200);
             })
             .catch((err) => {
-                console.log('Something went wront with your "UPDATE" method on `posts/:id`')
+                console.log('Something went wrong with your "UPDATE" method on `posts/:id`')
             })
     }
 
@@ -67,7 +67,7 @@ export default class SingleBlogPost extends Component {
         return (
             <div>
                 <h4>{title}</h4>
-                <h5>{author.username}</h5>
+                <h5>Author: {author.username}</h5>
                 <div>{content}</div>
                 {comments.map((comment, ind) => {
                     return <Comment comment={comment} key={ind}/>
