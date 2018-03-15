@@ -28,7 +28,7 @@ const postGetAll = (req, res) => {
 const postGetById = (req, res) => {
   const id = req.params.id;
   Post.findById(id)
-    .populate('author comments')
+    .populate('author')
     .then(post => {
       res.status(200).json(post);
     })
@@ -37,17 +37,36 @@ const postGetById = (req, res) => {
     });
 };
 
-// const postUpdate = (req, res) => {
-//   const id = req.params.id;
-//   const comment = req.body;
-//   Post.findByIdAndUpdate(id, comment, { new: true })
-//     .then(post => {
-//       res.status(200).json(post);
-//     })
-//     .catch(errorGettingPost => {
-//       res.status(500).json(errorGettingPost);
-//     });
-// };
+const postUpdate = (req, res) => {
+  const id = req.params.id;
+  const comment = req.body;
+  Post.findByIdAndUpdate(id, { $push: { comments: comment } }, { new: true })
+    .populate('comments.author', 'username -_id')
+    .then(post => {
+      console.log('post.comments in postControllers.js: ', post.comments)
+      res.status(200).json(post.comments);
+    })
+    .catch(error => {
+      res.status(500).json(error);
+    });
+
+  // Post.findById(id, (findErr, post) => {
+  //   post.comments.push(comment);
+  //   post
+  //     .save((saveErr, savedPost) => {
+  //       if (saveErr) console.log('SAVE ERROR!: ', saveErr);
+  //       else console.log(savedPost);
+  //     })
+  //     .then(savedPost => {
+  //       Post.findById(savedPost._id)
+  //         .populate('comments.author', 'username')
+  //         .then(populatedPost => {
+  //           res.status(200).json(populatedPost);
+  //         })
+  //         .catch(err => console.log('Final Error: ', err));
+  //     });
+  // });
+};
 
 module.exports = {
   postCreate,

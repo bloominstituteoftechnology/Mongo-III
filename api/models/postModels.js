@@ -5,10 +5,6 @@ const User = require('./userModels');
 const Comment = require('./commentModels');
 
 const PostSchema = new mongoose.Schema({
-  author: {
-    type: ObjectId,
-    ref: User.username,
-  },
   title: {
     type: String,
     required: true,
@@ -17,12 +13,16 @@ const PostSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  author: {
+    type: ObjectId,
+    ref: 'User',
+  },
   comments: [
     {
       text: String,
       author: {
         type: ObjectId,
-        ref: User.username,
+        ref: 'User',
       },
     },
   ],
