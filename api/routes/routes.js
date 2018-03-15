@@ -17,7 +17,19 @@ module.exports = (userRouter) => {
         user.save()
             .then(usr => res.status(201).send(usr))
             .catch(err => {
-                res.status(500).send({ error: "Something went wrong saving your user information", info: err});
+                res.status(500).send({error: "Something went wrong saving your user information", info: err});
+            });
+    });
+
+    userRouter.post('/login', (req, res) => {
+        const user = new UserModel(req.body);
+        UserModel.findOne({username: user.username})
+            .then(usr => {
+                if (usr === null) res.status(401).send({error: "User or Password wrong. Try again.", info: err});
+                res.status(200).send(usr);
+            })
+            .catch(err => {
+                res.status(500).send({error: "Something login you in", info: err});
             });
     });
 
