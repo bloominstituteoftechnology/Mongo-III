@@ -3,7 +3,7 @@ const User = require('./userModels');
 
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
-const PostSchema = Schema({
+const PostSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true,

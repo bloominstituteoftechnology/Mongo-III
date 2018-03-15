@@ -13,6 +13,22 @@ const createPost = (req, res) => {
     });
 };
 
+const getPosts = (req, res) => {
+  Post.find({})
+    .select('title')
+    .then(posts => {
+      if (!posts) {
+        res.status(500).json({ message: 'There was an error!', error: err })
+      } else {
+        res.status(200).json(posts);
+      }
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'There was an error!', error: err });
+    });
+};
+
 module.exports = {
-  createPost
+  createPost,
+  getPosts
 };
