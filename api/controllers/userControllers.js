@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const userModel = require("./models/userModels");
 
-const createUser = (req, res) => {
+function createUser = (req, res) => {
   const { userName, passWord } = req.body;
   const newUser = new userModel({ userName, passWord });
   newUser
