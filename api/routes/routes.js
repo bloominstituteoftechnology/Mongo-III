@@ -40,28 +40,31 @@ module.exports = (appRouter) => {
 
     appRouter.get('/posts', (req, res) => {
         PostModel.find({})
-            .then(post => res.status(200).send(post))
-            .catch(err => res.status(400).send({
-                error: `The information could not be reached. ${err}`
-            }));
-    });
-
-    appRouter.get('/posts/:id', (req, res) => {
-        PostModel.findById(req.params.id)
             .populate('author')
             .exec((err, post) => {
                 res.status(200).send(post)
             });
     });
 
-    appRouter.put('/posts/:id', (req, res) => {
-        console.log('req.body:::', req.body);
+    appRouter.get('/posts/:id', (req, res) => {
+        PostModel.findById(req.params.id)
+            .populate({
+                path: 'author',
+            })
+            .populate({
+                path: 'comments.author',
+            })
+            .exec((err, post) => {
+                res.status(200).send(post)
+            });
+    });
 
-        PostModel.findByIdAndUpdate(req.params.id, req.body, { runValidators: true })
-            .then(post => res.status(201).send(post))
-            .catch(err => res.status(400).send({
-                error: `The information could not be reached /posts/:id. ${err}`
-            }));
+    appRouter.put('/posts/:id', (req, res) => {
+        PostModel.findByIdAndUpdate(req.params.id, { "$push": { "comments": req.body } }, { new: true })
+            .populate('author')
+            .exec((err, post) => {
+                res.status(200).send(post)
+            });
     });
 
 };
