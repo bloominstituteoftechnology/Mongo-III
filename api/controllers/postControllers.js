@@ -14,8 +14,7 @@ const createPost = (req, res) => {
 };
 
 const getPosts = (req, res) => {
-  Post.find({})
-    .select('title')
+  Post.find({}, { title: 1 })
     .then(posts => {
       if (!posts) {
         res.status(404).json({ message: 'No such post found!' })
@@ -31,7 +30,7 @@ const getPosts = (req, res) => {
 const findById = (req, res) => {
   const { id } = req.params;
   Post.findById(id)
-    .populate('author')
+    .populate('author comments.author', 'username')
     .then(post => {
       if (!post) {
         res.status(404).json({ message: 'No such post found!' });
@@ -42,10 +41,36 @@ const findById = (req, res) => {
     .catch(err => {
       res.status(500).json({ message: 'There was an error!', error: err });
     });
-}
+};
+
+const updatePost = (req, res) => {
+  const { id } = req.params;
+  const { author, text } = req.body;
+  const comment = { author, text };
+  Post.findById(id)
+    .then(post => {
+      if (!post) {
+        res.status(404).json({ message: 'No post found!' })
+      } else {
+        const comments = post.comments;
+        comments.push(comment);
+        post
+          .save()
+          .then(post => {
+            Post.findById(post._id)
+              .populate('comments.author', 'username')
+              res.json(post);
+          });
+      }
+    })
+    .catch(err => {
+      res.status(500).json({ message: 'There was an error!' });
+    });
+};
 
 module.exports = {
   createPost,
   getPosts,
-  findById
+  findById,
+  updatePost
 };
