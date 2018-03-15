@@ -8,56 +8,64 @@ export default class SingleBlogPost extends Component {
     super();
     this.state = {
       post: {
-        title: 'This is a FAKE blog post title', 
-        _id: '234lj23kjh', 
+        title: 'This is a FAKE blog post title',
+        _id: '234lj23kjh',
         author: 'Patrick Saves the Day',
-        content: 'This is some FAKE content', 
+        content: 'This is some FAKE content',
         comments: [
-          {text:'This is a FAKE comment', author: 'Stanley Yelnats'},
-        ]},
+          { text: 'This is a FAKE comment', author: 'Stanley Yelnats' },
+        ],
+      },
       comment: '',
     };
     this.handleCommentText = this.handleCommentText.bind(this);
     this.addComment = this.addComment.bind(this);
   }
-  
+
   componentDidMount() {
-    this.getBlogPost()
+    this.getBlogPost();
   }
 
-  getBlogPost(){
-    const { id } = this.props.match.params
-    axios.get(`http://localhost:3030/posts/${id}`)
-      .then((data) => {
-        this.setState({post: data.data});
+  getBlogPost() {
+    const { id } = this.props.match.params;
+    axios
+      .get(`http://localhost:3030/posts/${id}`)
+      .then(data => {
+        this.setState({ post: data.data });
       })
-      .catch((err) => {
-        console.log('You are seeing this error because you have yet to implement the `post` to get single post', err );
+      .catch(err => {
+        console.log(
+          'You are seeing this error because you have yet to implement the `post` to get single post',
+          err
+        );
       });
   }
-  
+
   addComment(e) {
     e.preventDefault();
     const { comment } = this.state;
-    const { id } = this.props.match.params    
+    const { id } = this.props.match.params;
     const newComment = {
       text: comment,
       author: localStorage.getItem('uuID'),
     };
-    this.setState({comment: ''});
-    axios.put(`http://localhost:3030/posts/${id}`, newComment)
-      .then((data) => {
+    this.setState({ comment: '' });
+    axios
+      .put(`http://localhost:3030/posts/${id}`, newComment)
+      .then(data => {
         setTimeout(() => {
           this.getBlogPost();
         }, 200);
       })
-      .catch((err) => {
-        console.log('Something went wront with your "UPDATE" method on `posts/:id`')
-      })
+      .catch(err => {
+        console.log(
+          'Something went wront with your "UPDATE" method on `posts/:id`'
+        );
+      });
   }
-  
+
   handleCommentText(e) {
-    this.setState({comment: e.target.value});
+    this.setState({ comment: e.target.value });
   }
 
   render() {
@@ -68,20 +76,25 @@ export default class SingleBlogPost extends Component {
         <h5>{author.username}</h5>
         <div>{content}</div>
         {comments.map((comment, ind) => {
-          return <Comment comment={comment} key={ind} />
+          return <Comment comment={comment} key={ind} />;
         })}
         <p>Add comments</p>
         <form onSubmit={this.addComment}>
-          <textarea 
+          <textarea
             onChange={this.handleCommentText}
             value={this.state.comment}
             placeholder="add comment"
           />
-          <br/>
-          <button className="btn btn-default btn-sm" type="submit" onClick={this.addComment}>Submit Comment</button>
+          <br />
+          <button
+            className="btn btn-default btn-sm"
+            type="submit"
+            onClick={this.addComment}
+          >
+            Submit Comment
+          </button>
         </form>
       </div>
     );
   }
 }
-

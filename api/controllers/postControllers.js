@@ -29,6 +29,7 @@ const postGetById = (req, res) => {
   const id = req.params.id;
   Post.findById(id)
     .populate('author')
+    .populate({path: 'comments.author', select: 'username -_id'})
     .then(post => {
       res.status(200).json(post);
     })
@@ -41,14 +42,16 @@ const postUpdate = (req, res) => {
   const id = req.params.id;
   const comment = req.body;
   Post.findByIdAndUpdate(id, { $push: { comments: comment } }, { new: true })
-    .populate('comments.author', 'username -_id')
     .then(post => {
-      console.log('post.comments in postControllers.js: ', post.comments)
       res.status(200).json(post.comments);
     })
     .catch(error => {
       res.status(500).json(error);
     });
+
+  // Why doesn't push work?
+  // What is the difference between .exec and .then?
+  // Why does it populate in the console but not in the UI?
 
   // Post.findById(id, (findErr, post) => {
   //   post.comments.push(comment);
