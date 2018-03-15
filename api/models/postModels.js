@@ -4,7 +4,7 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 const PostSchema = mongoose.Schema({
     author: {
         type: ObjectId,
-        ref: 'user',
+        ref: 'users',
     },
     title: {
         type: String,
@@ -15,9 +15,15 @@ const PostSchema = mongoose.Schema({
     content: {
         type: String,
     },
-    comments: {
-        type: Array,
-    },
+    comments: [
+        {
+            text: String,
+            author: {
+                type: ObjectId,
+                ref: 'users',
+            },
+        },
+    ],
     createdOn: {
         type: String,
         required: true,
