@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const User = require('./userModels');
+const User = require('./userModels.js');
 
 const ObjectId = mongoose.Schema.Types.ObjectId;
 

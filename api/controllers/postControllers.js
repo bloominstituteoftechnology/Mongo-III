@@ -14,7 +14,8 @@ const createPost = (req, res) => {
 };
 
 const getPosts = (req, res) => {
-  Post.find({}, { title: 1 })
+  Post.find({})
+  .select('_id title')
     .then(posts => {
       if (!posts) {
         res.status(404).json({ message: 'No such post found!' })
