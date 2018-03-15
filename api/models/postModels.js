@@ -2,7 +2,22 @@ const mongoose = require('mongoose');
 
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
-const postSchema = new mongoose.Schema({
+const CommentSchema = new mongoose.Schema({
+  parentId: {
+    type: ObjectId,
+    ref: 'Post',
+  },
+  author: {
+    type: ObjectId,
+    ref: 'User',
+  },
+  text: {
+    type: String,
+    required: true,
+  },
+});
+
+const PostSchema = new mongoose.Schema({
   author: {
     type: ObjectId,
     ref: 'User',
@@ -16,9 +31,13 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  comments:[ {
-    type: String,
-  } ],
+  comments: [{
+    type: ObjectId,
+    ref: 'Comment',
+  }],
 });
 
-module.exports = mongoose.model('Post', postSchema);
+const Post = mongoose.model('Post', PostSchema);
+const Comment = mongoose.model('Comment', CommentSchema);
+
+module.exports = { Post, Comment };
