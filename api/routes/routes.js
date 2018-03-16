@@ -41,7 +41,7 @@ module.exports = (appRouter) => {
     //         });
     // });
 
-    appRouter.route('/posts').post(postController.getAllPosts);
+    appRouter.route('/posts').get(postController.getAllPosts);
     // appRouter.get('/posts', (req, res) => {
     //     PostModel.find({})
     //         .populate('author')
@@ -50,7 +50,7 @@ module.exports = (appRouter) => {
     //         });
     // });
 
-    appRouter.route('/posts/:id').post(postController.getPostById);
+    appRouter.route('/posts/:id').get(postController.getPostById);
     // appRouter.get('/posts/:id', (req, res) => {
     //     PostModel.findById(req.params.id)
     //         .populate({
@@ -64,7 +64,7 @@ module.exports = (appRouter) => {
     //         });
     // });
 
-    appRouter.route('/posts/:id').post(postController.updatePostById);
+    appRouter.route('/posts/:id').put(postController.updatePostById);
     // appRouter.put('/posts/:id', (req, res) => {
     //     PostModel.findByIdAndUpdate(req.params.id, { "$push": { "comments": req.body } }, { new: true })
     //         .populate('author')
