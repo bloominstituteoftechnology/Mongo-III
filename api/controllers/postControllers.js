@@ -1,4 +1,5 @@
 const Post = require('../models/postModels');
+const Comment = require('../models/postModels');
 
 const createPost = (req, res) => {
   const { title, content, author } = req.body;
@@ -28,7 +29,7 @@ const getPosts = (req, res) => {
     });
 };
 
-const findById = (req, res) => {
+const findPost = (req, res) => {
   const { id } = req.params;
   Post.findById(id)
     .populate('author comments.author', 'username')
@@ -50,11 +51,10 @@ const updatePost = (req, res) => {
   const comment = { author, text };
   Post.findById(id)
     .then(post => {
-      if (!post) {
-        res.status(404).json({ message: 'No post found!' })
-      } else {
+        console.log(post)
         const comments = post.comments;
         comments.push(comment);
+        console.log(comments)
         post
           .save()
           .then(post => {
@@ -62,7 +62,7 @@ const updatePost = (req, res) => {
               .populate('comments.author', 'username')
               res.json(post);
           });
-      }
+      
     })
     .catch(err => {
       res.status(500).json({ message: 'There was an error!' });
@@ -72,6 +72,6 @@ const updatePost = (req, res) => {
 module.exports = {
   createPost,
   getPosts,
-  findById,
+  findPost,
   updatePost
 };
