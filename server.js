@@ -1,4 +1,3 @@
-const bodyParser = require('body-parser');
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -16,7 +15,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/blog-posts', { useMongoClient: true });
 
 server.use(bodyParser.urlencoded({extended: true}));
-server.use(bodyParser.json());
+server.use(express.json());
 
 server.use(cors());
 
