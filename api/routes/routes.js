@@ -1,5 +1,5 @@
-const UserModel = require('../models/userModels'); //mongoose instance
-const PostModel = require('../models/postModels'); //mongoose instance
+const userController = require('../controllers/userControllers');
+const postController = require('../controllers/postControllers');
 
 module.exports = (appRouter) => {
 
@@ -11,60 +11,66 @@ module.exports = (appRouter) => {
             }));
     });
 
-    appRouter.post('/new-user', (req, res) => {
-        const user = new UserModel(req.body);
-        user.save()
-            .then(usr => res.status(201).send(usr))
-            .catch(err => {
-                res.status(500).send({error: "Something went wrong saving your user information", info: err});
-            });
-    });
+    appRouter.route('/new-user').post(userController.createUser);
+    // appRouter.post('/new-user', (req, res) => {
+    //     const user = new UserModel(req.body);
+    //     user.save()
+    //         .then(usr => res.status(201).send(usr))
+    //         .catch(err => {
+    //             res.status(500).send({error: "Something went wrong saving your user information", info: err});
+    //         });
+    // });
 
-    appRouter.post('/login', (req, res) => {
-        const user = new UserModel(req.body);
-        UserModel.findOne({$and: [{username: user.username}, {password: user.password}]})
-            .then(usr => (usr === null ? res.status(401).send() : res.status(200).send(usr)))
-            .catch(err => {
-                res.status(500).send({error: "Something went wrong login you in. Try again.", info: err});
-            });
-    });
+    appRouter.route('/login').post(userController.loginUser);
+    // appRouter.post('/login', (req, res) => {
+    //     const user = new UserModel(req.body);
+    //     UserModel.findOne({$and: [{username: user.username}, {password: user.password}]})
+    //         .then(usr => (usr === null ? res.status(401).send() : res.status(200).send(usr)))
+    //         .catch(err => {
+    //             res.status(500).send({error: "Something went wrong login you in. Try again.", info: err});
+    //         });
+    // });
 
-    appRouter.post('/new-post', (req, res) => {
-        const post = new PostModel(req.body);
-        post.save()
-            .then(pst => res.status(201).send(pst))
-            .catch(err => {
-                res.status(500).send({error: "Something went wrong saving the post", info: err});
-            });
-    });
+    appRouter.route('/new-post').post(postController.createPost);
+    // appRouter.post('/new-post', (req, res) => {
+    //     const post = new PostModel(req.body);
+    //     post.save()
+    //         .then(pst => res.status(201).send(pst))
+    //         .catch(err => {
+    //             res.status(500).send({error: "Something went wrong saving the post", info: err});
+    //         });
+    // });
 
-    appRouter.get('/posts', (req, res) => {
-        PostModel.find({})
-            .populate('author')
-            .exec((err, post) => {
-                res.status(200).send(post)
-            });
-    });
+    appRouter.route('/posts').post(postController.getAllPosts);
+    // appRouter.get('/posts', (req, res) => {
+    //     PostModel.find({})
+    //         .populate('author')
+    //         .exec((err, post) => {
+    //             res.status(200).send(post)
+    //         });
+    // });
 
-    appRouter.get('/posts/:id', (req, res) => {
-        PostModel.findById(req.params.id)
-            .populate({
-                path: 'author',
-            })
-            .populate({
-                path: 'comments.author',
-            })
-            .exec((err, post) => {
-                res.status(200).send(post)
-            });
-    });
+    appRouter.route('/posts/:id').post(postController.getPostById);
+    // appRouter.get('/posts/:id', (req, res) => {
+    //     PostModel.findById(req.params.id)
+    //         .populate({
+    //             path: 'author',
+    //         })
+    //         .populate({
+    //             path: 'comments.author',
+    //         })
+    //         .exec((err, post) => {
+    //             res.status(200).send(post)
+    //         });
+    // });
 
-    appRouter.put('/posts/:id', (req, res) => {
-        PostModel.findByIdAndUpdate(req.params.id, { "$push": { "comments": req.body } }, { new: true })
-            .populate('author')
-            .exec((err, post) => {
-                res.status(200).send(post)
-            });
-    });
+    appRouter.route('/posts/:id').post(postController.updatePostById);
+    // appRouter.put('/posts/:id', (req, res) => {
+    //     PostModel.findByIdAndUpdate(req.params.id, { "$push": { "comments": req.body } }, { new: true })
+    //         .populate('author')
+    //         .exec((err, post) => {
+    //             res.status(200).send(post)
+    //         });
+    // });
 
 };
