@@ -31,7 +31,7 @@ export default class CreatePost extends Component {
         window.location = `/posts/${newPostId}`
       })
       .catch((err) => {
-        console.log('You still need to implement your `POST` method on `/posts`', err);
+        console.log('You still need to implement your `POST` method on `/posts`', err.message);
       })
   }
   render() {
@@ -39,22 +39,22 @@ export default class CreatePost extends Component {
       <form className="Login-form">
         <FormGroup className="Login-group" controlId="titleForm">
           Blog Title
-          <FormControl 
-            id="titleForm" 
-            onChange={this.handleTitleChange} 
-            placeholder="Blog Title" 
-            type="text" 
+          <FormControl
+            id="titleForm"
+            onChange={this.handleTitleChange}
+            placeholder="Blog Title"
+            type="text"
             value={this.state.title}
           />
         </FormGroup>
         <FormGroup className="Login-group" controlId="contentForm">
           Blog Content
-          <textarea 
+          <textarea
             className="form-control"
-            id="contentForm" 
-            onChange={this.handleContent} 
-            placeholder="Blog Content" 
-            type="text" 
+            id="contentForm"
+            onChange={this.handleContent}
+            placeholder="Blog Content"
+            type="text"
             value={this.state.content}
           ></textarea>
         </FormGroup>

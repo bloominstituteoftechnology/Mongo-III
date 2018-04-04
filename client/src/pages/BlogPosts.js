@@ -19,10 +19,10 @@ export default class BlogPosts extends Component {
         this.setState({posts: data.data});
       })
       .catch((err) => {
-        console.log('You still need to implement the `POSTS` `GET`', err);
+        console.log('You still need to implement the `POSTS` `GET`', err.message);
       });
   }
-  
+
   render() {
     const { posts } = this.state;
     return (
@@ -39,4 +39,3 @@ export default class BlogPosts extends Component {
     );
   }
 }
-

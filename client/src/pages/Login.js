@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { FormControl, FormGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import "./Login.css";
+import './Login.css';
 
 export default class Login extends Component {
   constructor(){
@@ -29,7 +29,7 @@ export default class Login extends Component {
         localStorage.setItem('uuID', data.data._id);
         setTimeout(() => {
           window.location = '/posts';
-        }); 
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -40,24 +40,24 @@ export default class Login extends Component {
       <form className="Login-form">
         <FormGroup className="Login-group" controlId="formHorizontalEmail">
             User Name
-            <FormControl 
+            <FormControl
               id="formHorizontalEmail"
               className="form-control"
-              onChange={this.handleSetUserName} 
+              onChange={this.handleSetUserName}
               placeholder="User Name"
-              type="text" 
-              value={this.state.userName} 
+              type="text"
+              value={this.state.userName}
             />
           </FormGroup>
           <FormGroup className="Login-group" controlId="formHorizontalPassword">
             Password
-            <FormControl 
+            <FormControl
               id="formHorizontalPassword"
               className="form-control"
-              onChange={this.handleSetPassword} 
+              onChange={this.handleSetPassword}
               placeholder="password"
-              type="password" 
-              value={this.state.password} 
+              type="password"
+              value={this.state.password}
             />
           <Link to="/create-user">Don't have an account? Sign up here.</Link>
           <br />
