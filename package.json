@@ -1,16 +1,17 @@
 {
-  "name": "Mongo-III-Lab",
+  "name": "mongo-iii-lab",
   "version": "1.0.0",
-  "description": "simple bloggin platform",
+  "description": "simple blogging platform",
   "main": "index.js",
-  "license": "MIT",
   "scripts": {
     "start": "nodemon server.js"
   },
   "dependencies": {
-    "body-parser": "^1.17.2",
-    "cors": "^2.8.4",
-    "express": "^4.15.4",
-    "mongoose": "^4.11.7"
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.5.11"
+  },
+  "devDependencies": {
+    "nodemon": "^1.19.1"
   }
 }
